@@ -1,0 +1,146 @@
+\documentclass{article}
+
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks = true,
+    urlcolor = blue,       % color of external links using \href
+    linkcolor= blue,       % color of internal links 
+    citecolor= blue,       % color of links to bibliography
+    filecolor= blue,        % color of file links
+    }
+    
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{theorem} 
+   \newtheorem{theorem}{Theorem}[section]
+   \newtheorem{corollary}[theorem]{Corollary}
+   \newtheorem{lemma}[theorem]{Lemma}
+   \newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+   \newtheorem{definition}[theorem]{Definition}
+   \newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}    
+  \newtheorem{remark}[theorem]{Remark}
+
+
+\title{CPSC-354 Report}
+\author{Sharon Chang  \\ Chapman University}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Placeholder  
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}\label{intro}
+
+Placeholder
+
+\section{Homework}\label{homework}
+
+
+\subsection{Week 1}
+
+\begin{lstlisting}
+def numInput():
+    while True:
+        numStr = input("Enter a number: ")
+        try:
+            num = int(numStr)
+            if num > 0:
+                return num
+            else:
+                print("The number must be greater than 0.")
+                continue
+        except:
+            print("Invalid input.")
+
+def gcd(numA, numB):
+    if (numA > numB):
+        result = gcd(numA-numB, numB)
+    elif (numA < numB):
+        result = gcd(numA, numB-numA)
+    else:
+        result = numA
+    return result
+
+# Main
+numA = numInput()
+print("First number acquired.")
+numB = numInput()
+print("Second number acquired.")
+
+result = gcd(numA, numB)
+print("The GCD of " + str(numA) + " and " + str(numB) + " is: " + str(result) + ".")
+\end{lstlisting}
+%
+I chose to write my GCD program in Python.
+
+\medskip\noindent
+The numInput function first gets inputs from the user and makes sure that they are valid inputs to perform the gcd function on. The while loop traps the user until they input a valid non-zero integer. This repeats twice to obtain two numbers.
+
+\medskip\noindent
+After that, the two numbers are put into the gcd function. If number A is greater than number B, it recursively calls on the function again to find the GCD between the difference of A and B and number B. If number B is greater than number A, it recursively calls on the function again to find the GCD between number A and the difference of B and A. This repeats until the two numbers being compared are equal, after which the function returns the equal number. This equal number is the GCD of the two given numbers. This recursive function works because the method of subtraction will repeatedly lower the numbers until they inevitably equal out to yield a result.
+
+\section{Project}
+
+Placeholder
+
+\subsection{Specification}
+
+Placeholder
+
+\subsection{Prototype}
+
+Placeholder
+
+\subsection{Documentation}
+
+Placeholder
+
+\subsection{Critical Appraisal}
+
+Placeholder
+
+\section{Conclusions}\label{conclusions}
+
+Placeholder
+
+\begin{thebibliography}{99}
+\bibitem[PL]{PL} \href{https://github.com/alexhkurz/programming-languages-2022/blob/main/README.md}{Programming Languages 2022}, Chapman University, 2022.
+\end{thebibliography}
+
+\end{document}
