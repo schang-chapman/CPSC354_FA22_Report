@@ -1,0 +1,7 @@
+# Why does LaTeX export have so much trash with it
+
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
