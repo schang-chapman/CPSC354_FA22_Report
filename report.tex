@@ -155,8 +155,7 @@ select_evens [1,2,3,4,5] =
 	length [5] == 1 = 2 : 4 : [] =
 	[2,4]
 \end{lstlisting}
-
-\medskip\noindent
+%
 My select odds function is similar to my select evens function, with a base case of an empty list. If the length of the given list is greater than or equal to 1, the head of list x:xs, which is the value x, is taken as the first element of the list. The tail is then passed back into select odds for the same reasons as the select evens function. If the length is too short, it returns the given list.
 
 \begin{lstlisting}
@@ -166,8 +165,7 @@ select_odds [1,2,3,4,5] =
 	length [5] >= 1 = 1 : 3 : 5 : [] =
 	[1,3,5]
 \end{lstlisting}
-
-\medskip\noindent
+%
 The member function returns a base case of False given any input with an empty list. When given a list, as long as the list is greater than or equal to 1, it checks to see if the given input value matches the head of the given list. If it matches, it returns true, otherwise, it passes the tail of the list back into the member function.
 
 \begin{lstlisting}
@@ -176,8 +174,7 @@ member 3 [1,2,3,4,5] =
 	3 != 2 = member 3 [3,4,5] =
 	3 == 3 = True
 \end{lstlisting}
-
-\medskip\noindent
+%
 When given an empty set of lists, the append function returns an empty list. If only one of the given lists is empty, it returns the non-empty list. When given two non-empty lists, the head of the first list is taken as the first element of the list. It is attached to the resulting list from appending the tail of the first list with the whole of the second list. Eventually, this empties out the first list, which will cause the entirety of the second list to be appended onto the elements of the first list.
 
 \begin{lstlisting}
@@ -188,8 +185,7 @@ append [1,2,3] [4,5,6] =
 	1 : 2 : 3 : [4,5,6] =
 	[1,2,3,4,5,6]
 \end{lstlisting}
-
-\medskip\noindent
+%
 The base case of the revert function returns an empty list when given an empty list. When given a non-empty list, the revert function uses the previous append function to create a new list where the head of the given list is placed at the back. The remaining list elements are passed back into the revert function, which will result in a list where the elements are in reversed order.
 
 \begin{lstlisting}
@@ -207,8 +203,7 @@ revert [1,2,3,4,5] =
 	[] : [5] : [4] : [3] : [2] : [1] =
 	[5,4,3,2,1]
 \end{lstlisting}
-
-\medskip\noindent
+%
 When the two lists given to the less equal function are both empty, the function returns a true. If the first list is non-empty but the second list is, the function returns false. If the second list is non-empty but the first one is, the function returns true. If both lists are non-empty lists, the head of both lists is compared to one another. If the head of the first list is less than or equal to the second list, the function continues by passing on the tails of both lists back into itself. Otherwise, if the head of the first list is greater than the head of the second list, the function stops and returns a false.
 
 \begin{lstlisting}
@@ -217,6 +212,76 @@ less_equal [1,1,4] [1,2,3] =
 	1 <= 2 = less_equal [4] [3] =
 	4 !<= 3 = False
 \end{lstlisting}
+
+\subsection{Week 3}
+\begin{lstlisting}
+hanoi 5 0 2
+	hanoi 4 0 1
+		hanoi 3 0 2
+			hanoi 2 0 1
+				hanoi 1 0 2 = move 0 2
+				move 0 1
+				hanoi 1 2 1 = move 2 1
+			move 0 2
+			hanoi 2 1 2
+				hanoi 1 1 0 = move 1 0
+				move 1 2
+				hanoi 1 0 2 = move 0 2
+		move 0 1
+		hanoi 3 2 1
+			hanoi 2 2 0
+				hanoi 1 2 1 = move 2 1
+				move 2 0
+				hanoi 1 1 0 = move 1 0
+			move 2 1
+			hanoi 2 0 1
+				hanoi 1 0 2 = move 0 2
+				move 0 1
+				hanoi 1 2 1 = move 2 1
+	move 0 2
+	hanoi 4 1 2
+		hanoi 3 1 0
+			hanoi 2 1 2
+				hanoi 1 1 0 = move 1 0
+				move 1 2
+				hanoi 1 0 2 = move 0 2
+			move 1 0
+			hanoi 2 2 0
+				hanoi 1 2 1 = move 2 1
+				move 2 0
+				hanoi 1 1 0 = move 1 0
+		move 1 2
+		hanoi 3 0 2
+			hanoi 2 0 1
+				hanoi 1 0 2 = move 0 2
+				move 0 1
+				hanoi 1 2 1 = move 2 1
+			move 0 2
+			hanoi 2 1 2
+				hanoi 1 1 0 = move 1 0
+				move 1 2
+				hanoi 1 0 2 = move 0 2
+\end{lstlisting}
+%
+These instructions count the leftmost pole as the Pole 1, the middle pole as Pole 2, and the rightmost pole as Pole 3.
+
+\medskip\noindent
+Move the top disk from Pole 1 to Pole 3. Next, move the next top disk from Pole 1 to Pole 2. Take the top disk from Pole 3 and move it to Pole 2. Then, move the top disk from Pole 1 to Pole 3. Follow by moving the top from Pole 2 to Pole 1. Then, move the top disk from Pole 2 to Pole 3. Afterwards, move the top disk from Pole 1 to Pole 3. Move the next top disk from Pole 1 to Pole 2. Next, take the top disk from Pole 3 and move it to Pole 2. Take the next top disk from Pole 3 and move it to Pole 1. Then, take the top disk from Pole 2 and move it to Pole 1. Follow by moving the top disk from Pole 3 to Pole 2. Next, move the top disk from Pole 1 to Pole 3. Then, move the next top disk from Pole 1 to Pole 2. Return to the top disk of Pole 3 and move it to Pole 2. Now, take the top disk of Pole 1 and move it to Pole 3. Next, take the top disk from Pole 2 and move it to Pole 1. Then, take the top disk from Pole 2 and move it to Pole 3. Follow by taking the top disk from Pole 1 and moving it to Pole 3. Return to Pole 2 and move its top disk to Pole 1. Now, take the top disk from Pole 3 and move it to Pole 2. Next, take the top disk from Pole 3 and move it to Pole 1. Then, take the top disk from Pole 2 and move it to Pole 1. Take the next top disk from Pole 2 and move it to Pole 3. Now, take the top disk from Pole 1 and move it to Pole 3. Return to the next top disk from Pole 1 and move it to Pole 2. Then, take the top disk from Pole 3 and move it to Pole 2. Next, take the top disk from Pole 1 and move it to Pole 3. Then, take the top disk from Pole 2 and move it to Pole 1. Move the next top disk from Pole 2 to Pole 3. Then, take the top disk from Pole 1 and move it to Pole 3. A 5-disk Tower of Hanoi has now been successfully moved from Pole 1 to Pole 3.
+
+\medskip\noindent
+The word hanoi appears 31 times in the computation.
+
+\medskip\noindent
+\begin{align*}
+{\rm hanoi} (1) (x) (y)
+& = {\rm move}(x)(y)
+\end{align*}
+\begin{align*}
+{\rm hanoi} (n+1) (x) (y)
+& = {\rm hanoi} (n) (x) ({\rm other}(x)(y)) \\
+& = {\rm move}(x)(y)\\
+& = {\rm hanoi} (n) ({\rm other}(x)(y)) (y)
+\end{align*}
 
 \section{Project}
 
