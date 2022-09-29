@@ -15,6 +15,7 @@ data II = II NN NN
 
 -- Positive integers (to avoid dividing by 0)
 data PP = I | T PP
+  deriving (Eq,Show) -- for equality and printing
 
 -- Rational numbers
 data QQ =  QQ II PP
@@ -26,6 +27,23 @@ data QQ =  QQ II PP
 ----------------
 -- PP Arithmetic
 ----------------
+
+-- add positive numbers
+addP :: PP -> PP -> PP
+addP I p = p
+addP (T n) p = T (addP n p)
+
+-- multiply positive numbers
+multP :: PP -> PP -> PP
+multP I p = I
+multP (T n) p = addP (multP n p) p
+
+-- convert numbers of type PP to numbers of type NN
+-- nn_pp :: PP -> NN
+
+-- convert numbers of type PP to numbers of type II
+-- ii_pp :: PP -> II
+
 ----------------
 -- NN Arithmetic
 ----------------
@@ -39,6 +57,12 @@ addN (S n) m = S (addN n m)
 multN :: NN -> NN -> NN
 multN O m = O
 multN (S n) m = addN (multN n m) m
+
+-- division, eg 13 divided by 5 is 2 
+-- divN :: NN -> PP -> NN
+
+-- remainder, eg 13 modulo by 5 is 3
+-- modN :: NN -> PP -> NN
 
 ----------------
 -- II Arithmetic
@@ -64,8 +88,7 @@ multN (S n) m = addN (multN n m) m
 -- Testing
 ----------
 main = do
-    print $ addN (S (S O)) (S O) -- S (S (S O))
-    print $ multN (S (S O)) (S (S (S O))) -- S (S (S (S (S (S O)))))
+    print $ divN (S (S (S (S O)))) (T I)
 
 
 
