@@ -39,7 +39,9 @@ multP I p = I
 multP (T n) p = addP (multP n p) p
 
 -- convert numbers of type PP to numbers of type NN
--- nn_pp :: PP -> NN
+nn_pp :: PP -> NN
+nn_pp I = S O
+nn_pp (T p) = S (nn_pp p)
 
 -- convert numbers of type PP to numbers of type II
 -- ii_pp :: PP -> II
@@ -88,7 +90,6 @@ multN (S n) m = addN (multN n m) m
 -- Testing
 ----------
 main = do
-    print $ divN (S (S (S (S O)))) (T I)
 
 
 
