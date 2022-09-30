@@ -117,6 +117,10 @@ instance Eq QQ where
 -- Normalisation
 ----------------
 
+normalizeI :: II -> II
+normalizeI (II a O) = (II a O)
+normalizeI (II O b) = (II O b)
+normalizeI (II (S a) (S b)) = normalizeI (II a b)
 
 ----------------------------------------------------
 -- Converting between VM-numbers and Haskell-numbers
@@ -127,4 +131,3 @@ instance Eq QQ where
 -- Testing
 ----------
 main = do
-  print $ (QQ (II (S O) O) (T I)) == (QQ (II O (S O)) I)
