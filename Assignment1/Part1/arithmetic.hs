@@ -19,7 +19,7 @@ data PP = I | T PP
 
 -- Rational numbers
 data QQ =  QQ II PP
-  deriving (Eq,Show) -- for equality and printing
+  deriving Show -- for equality and printing
 
 ------------------------
 -- Arithmetic on the  VM
@@ -110,8 +110,8 @@ multQ (QQ (II a b) I) (QQ (II d e) I) = (QQ (multI (II a b) (II d e)) I)
 multQ (QQ (II a b) (T c)) (QQ (II d e) (T f)) = (QQ (multI (II a b) (II d e)) (multP (T c) (T f)))
 
 -- Equality of fractions
---instance Eq QQ where
---  (QQ a b) == (QQ c d) =
+instance Eq QQ where
+  (QQ a b) == (QQ c d) = (multI a (ii_pp d)) == (multI (ii_pp b) c)
 
 ----------------
 -- Normalisation
@@ -127,4 +127,4 @@ multQ (QQ (II a b) (T c)) (QQ (II d e) (T f)) = (QQ (multI (II a b) (II d e)) (m
 -- Testing
 ----------
 main = do
-  print $ multQ (QQ (II (S O) O) (T I)) (QQ (II (S O) O) (T I))
+  print $ (QQ (II (S O) O) (T I)) == (QQ (II O (S O)) I)
