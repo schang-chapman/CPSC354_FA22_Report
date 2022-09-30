@@ -145,11 +145,17 @@ int_ii (II a O) = int_nn a
 int_ii (II O b) = - int_nn b
 
 -- Precondition: Inputs are positive
---pp_int :: Integer -> PP
+pp_int :: Integer -> PP
+pp_int 1 = I
+pp_int n = T (pp_int (n-1))
 
---int_pp :: PP->Integer
+int_pp :: PP -> Integer
+int_pp I = 1
+int_pp (T p) = 1 + int_pp p
 
---float_qq :: QQ -> Float
+float_qq :: QQ -> Float
+float_qq (QQ (II a b) I) = (fromIntegral (int_nn a))
+float_qq (QQ (II a b) (T c)) = (fromIntegral (int_nn a)) / (fromIntegral (int_pp (T c)))
 
 ------------------------------
 -- Normalisation by Evaluation
@@ -161,5 +167,4 @@ int_ii (II O b) = - int_nn b
 -- Testing
 ----------
 main = do
-  print $ ii_int (-3)
-  print $ int_ii (II O (S (S (S (S (S O))))))
+  print $ float_qq (QQ (II (S O) O) (T I))
