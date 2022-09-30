@@ -67,13 +67,13 @@ multN (S n) m = addN (multN n m) m
 divN :: NN -> PP -> NN
 divN O n = O
 divN (S m) (T n) | (nn_pp n) == (modN m (T n)) = S (divN m (T n))
-                | otherwise = divN m (T n)
+                 | otherwise = divN m (T n)
 
 -- remainder, eg 13 modulo by 5 is 3
 modN :: NN -> PP -> NN
 modN O n = O
 modN (S m) (T n) | (nn_pp n) == (modN m (T n)) = O
-                | otherwise = S (modN m (T n))
+                 | otherwise = S (modN m (T n))
 
 ----------------
 -- II Arithmetic
@@ -135,9 +135,14 @@ int_nn :: NN->Integer
 int_nn O = 0
 int_nn (S n) = 1 + int_nn n
 
---ii_int :: Integer -> II
+ii_int :: Integer -> II
+ii_int n | n > 0 = II (nn_int n) O
+         | n < 0 = II O (nn_int (abs n))
+         | otherwise = II O O
 
---int_ii :: II -> Integer
+int_ii :: II -> Integer
+int_ii (II a O) = int_nn a
+int_ii (II O b) = - int_nn b
 
 -- Precondition: Inputs are positive
 --pp_int :: Integer -> PP
@@ -156,3 +161,5 @@ int_nn (S n) = 1 + int_nn n
 -- Testing
 ----------
 main = do
+  print $ ii_int (-3)
+  print $ int_ii (II O (S (S (S (S (S O))))))
