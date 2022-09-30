@@ -1,0 +1,3 @@
+# Ignoring compilation garbage
+*
+!.gitignore
