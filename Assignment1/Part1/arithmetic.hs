@@ -19,6 +19,7 @@ data PP = I | T PP
 
 -- Rational numbers
 data QQ =  QQ II PP
+  deriving (Eq,Show) -- for equality and printing
 
 ------------------------
 -- Arithmetic on the  VM
@@ -30,12 +31,12 @@ data QQ =  QQ II PP
 
 -- add positive numbers
 addP :: PP -> PP -> PP
-addP I p = p
+addP I p = T p
 addP (T n) p = T (addP n p)
 
 -- multiply positive numbers
 multP :: PP -> PP -> PP
-multP I p = I
+multP I p = p
 multP (T n) p = addP (multP n p) p
 
 -- convert numbers of type PP to numbers of type NN
@@ -98,6 +99,17 @@ instance Eq II where
 -- QQ Arithmetic
 ----------------
 
+-- Addition: (a/b)+(c/d)=(ad+bc)/(bd)
+addQ :: QQ -> QQ -> QQ
+addQ (QQ (II a b) I) (QQ (II d e) I) = (QQ (addI (II a b) (II d e)) I)
+addQ (QQ (II a b) (T c)) (QQ (II d e) (T f)) = (QQ (addI (multI (II a b) (ii_pp (T f))) (multI (ii_pp (T c)) (II d e))) (multP (T c) (T f)))
+
+-- Multiplication: (a/b)*(c/d)=(ac)/(bd)
+--multQ :: QQ -> QQ -> QQ
+
+-- Equality of fractions
+--instance Eq QQ where
+--  (QQ a b) == (QQ c d) =
 
 ----------------
 -- Normalisation
@@ -113,8 +125,5 @@ instance Eq II where
 -- Testing
 ----------
 main = do
-  print $ (II (S (S (S O))) O) == (II (S (S (S O))) O)
-
-
-
-
+  print $ multP (I) (T I)
+  print $ addQ (QQ (II (S O) O) (T I)) (QQ (II (S O) O) (T I))
