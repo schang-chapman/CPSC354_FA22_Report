@@ -1,10 +1,13 @@
 # Everything exports with too much garbage Jesus Christ
 
-*.aux
-*.log
-*.out
-*.synctex.gz
-*.toc
+*
 
-# Code testing grounds
-test.hs
+!.gitignore
+
+!report.pdf
+!report.tex
+
+!numbers.cf
+!arithmetic.hs
+!Calculator.hs
+!Interpreter.hs

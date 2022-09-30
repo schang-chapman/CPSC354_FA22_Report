@@ -19,10 +19,10 @@ Grammar
 	Exp1 -> Exp1 '%' Exp2                              (10)
 	Exp1 -> Exp2                                       (11)
 	Exp2 -> Exp2 '^' Exp3                              (12)
-	Exp2 -> Exp3                                       (13)
-	Exp3 -> Integer                                    (14)
-	Exp3 -> '-' Exp3                                   (15)
-	Exp3 -> '|' Exp3 '|'                               (16)
+	Exp2 -> '|' Exp2 '|'                               (13)
+	Exp2 -> Exp3                                       (14)
+	Exp3 -> Integer                                    (15)
+	Exp3 -> '-' Exp3                                   (16)
 	Exp3 -> '(' Exp ')'                                (17)
 
 -----------------------------------------------------------------------------
@@ -49,8 +49,8 @@ Non-terminals
 	Integer         rule  4
 	Exp             rules 5, 6, 7
 	Exp1            rules 8, 9, 10, 11
-	Exp2            rules 12, 13
-	Exp3            rules 14, 15, 16, 17
+	Exp2            rules 12, 13, 14
+	Exp3            rules 15, 16, 17
 
 -----------------------------------------------------------------------------
 States
@@ -61,14 +61,14 @@ State 0
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp            goto state 15
 	Exp1           goto state 16
 	Exp2           goto state 14
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 1
 
@@ -76,13 +76,13 @@ State 1
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp1           goto state 13
 	Exp2           goto state 14
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 2
 
@@ -90,12 +90,12 @@ State 2
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
-	Exp2           goto state 11
-	Exp3           goto state 12
+	Exp2           goto state 10
+	Exp3           goto state 11
 
 State 3
 
@@ -103,7 +103,6 @@ State 3
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
@@ -133,17 +132,17 @@ State 5
 
 State 6
 
-	Exp3 -> Integer .                                   (rule 14)
+	Exp3 -> Integer .                                   (rule 15)
 
-	'%'            reduce using rule 14
-	')'            reduce using rule 14
-	'*'            reduce using rule 14
-	'+'            reduce using rule 14
-	'-'            reduce using rule 14
-	'/'            reduce using rule 14
-	'^'            reduce using rule 14
-	'|'            reduce using rule 14
-	%eof           reduce using rule 14
+	'%'            reduce using rule 15
+	')'            reduce using rule 15
+	'*'            reduce using rule 15
+	'+'            reduce using rule 15
+	'-'            reduce using rule 15
+	'/'            reduce using rule 15
+	'^'            reduce using rule 15
+	'|'            reduce using rule 15
+	%eof           reduce using rule 15
 
 
 State 7
@@ -159,40 +158,27 @@ State 8
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp            goto state 25
 	Exp1           goto state 16
 	Exp2           goto state 14
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 9
 
-	Exp3 -> '-' . Exp3                                  (rule 15)
+	Exp3 -> '-' . Exp3                                  (rule 16)
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp3           goto state 24
 
 State 10
-
-	Exp3 -> '|' . Exp3 '|'                              (rule 16)
-
-	'('            shift, and enter state 8
-	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
-	L_integ        shift, and enter state 5
-
-	Integer        goto state 6
-	Exp3           goto state 23
-
-State 11
 
 	%start_pExp2 -> Exp2 .                              (rule 2)
 	Exp2 -> Exp2 . '^' Exp3                             (rule 12)
@@ -201,19 +187,33 @@ State 11
 	%eof           accept
 
 
+State 11
+
+	Exp2 -> Exp3 .                                      (rule 14)
+
+	'%'            reduce using rule 14
+	')'            reduce using rule 14
+	'*'            reduce using rule 14
+	'+'            reduce using rule 14
+	'-'            reduce using rule 14
+	'/'            reduce using rule 14
+	'^'            reduce using rule 14
+	'|'            reduce using rule 14
+	%eof           reduce using rule 14
+
+
 State 12
 
-	Exp2 -> Exp3 .                                      (rule 13)
+	Exp2 -> '|' . Exp2 '|'                              (rule 13)
 
-	'%'            reduce using rule 13
-	')'            reduce using rule 13
-	'*'            reduce using rule 13
-	'+'            reduce using rule 13
-	'-'            reduce using rule 13
-	'/'            reduce using rule 13
-	'^'            reduce using rule 13
-	%eof           reduce using rule 13
+	'('            shift, and enter state 8
+	'-'            shift, and enter state 9
+	'|'            shift, and enter state 12
+	L_integ        shift, and enter state 5
 
+	Integer        goto state 6
+	Exp2           goto state 23
+	Exp3           goto state 11
 
 State 13
 
@@ -276,12 +276,12 @@ State 17
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp2           goto state 33
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 18
 
@@ -289,12 +289,12 @@ State 18
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp2           goto state 32
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 19
 
@@ -302,12 +302,12 @@ State 19
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp2           goto state 31
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 20
 
@@ -315,13 +315,13 @@ State 20
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp1           goto state 30
 	Exp2           goto state 14
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 21
 
@@ -329,13 +329,13 @@ State 21
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
+	'|'            shift, and enter state 12
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
 	Exp1           goto state 29
 	Exp2           goto state 14
-	Exp3           goto state 12
+	Exp3           goto state 11
 
 State 22
 
@@ -343,7 +343,6 @@ State 22
 
 	'('            shift, and enter state 8
 	'-'            shift, and enter state 9
-	'|'            shift, and enter state 10
 	L_integ        shift, and enter state 5
 
 	Integer        goto state 6
@@ -351,24 +350,26 @@ State 22
 
 State 23
 
-	Exp3 -> '|' Exp3 . '|'                              (rule 16)
+	Exp2 -> Exp2 . '^' Exp3                             (rule 12)
+	Exp2 -> '|' Exp2 . '|'                              (rule 13)
 
+	'^'            shift, and enter state 22
 	'|'            shift, and enter state 27
 
 
 State 24
 
-	Exp3 -> '-' Exp3 .                                  (rule 15)
+	Exp3 -> '-' Exp3 .                                  (rule 16)
 
-	'%'            reduce using rule 15
-	')'            reduce using rule 15
-	'*'            reduce using rule 15
-	'+'            reduce using rule 15
-	'-'            reduce using rule 15
-	'/'            reduce using rule 15
-	'^'            reduce using rule 15
-	'|'            reduce using rule 15
-	%eof           reduce using rule 15
+	'%'            reduce using rule 16
+	')'            reduce using rule 16
+	'*'            reduce using rule 16
+	'+'            reduce using rule 16
+	'-'            reduce using rule 16
+	'/'            reduce using rule 16
+	'^'            reduce using rule 16
+	'|'            reduce using rule 16
+	%eof           reduce using rule 16
 
 
 State 25
@@ -399,17 +400,17 @@ State 26
 
 State 27
 
-	Exp3 -> '|' Exp3 '|' .                              (rule 16)
+	Exp2 -> '|' Exp2 '|' .                              (rule 13)
 
-	'%'            reduce using rule 16
-	')'            reduce using rule 16
-	'*'            reduce using rule 16
-	'+'            reduce using rule 16
-	'-'            reduce using rule 16
-	'/'            reduce using rule 16
-	'^'            reduce using rule 16
-	'|'            reduce using rule 16
-	%eof           reduce using rule 16
+	'%'            reduce using rule 13
+	')'            reduce using rule 13
+	'*'            reduce using rule 13
+	'+'            reduce using rule 13
+	'-'            reduce using rule 13
+	'/'            reduce using rule 13
+	'^'            reduce using rule 13
+	'|'            reduce using rule 13
+	%eof           reduce using rule 13
 
 
 State 28
@@ -423,6 +424,7 @@ State 28
 	'-'            reduce using rule 12
 	'/'            reduce using rule 12
 	'^'            reduce using rule 12
+	'|'            reduce using rule 12
 	%eof           reduce using rule 12
 
 
