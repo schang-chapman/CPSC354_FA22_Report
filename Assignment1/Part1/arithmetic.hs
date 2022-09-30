@@ -78,6 +78,21 @@ modN (S m) (T n) | (nn_pp n) == (modN m (T n)) = O
 -- II Arithmetic
 ----------------
 
+-- Addition: (a-b)+(c-d)=(a+c)-(b+d)
+addI :: II -> II -> II
+addI (II a b) (II c d) = II (addN (addN a c) (multN b d)) (addN b d)
+
+-- Multiplication: (a-b)*(c-d)=(ac+bd)-(ad+bc)
+multI :: II -> II -> II
+multI (II a b) (II c d) = II (addN (multN a c) (multN b d)) (addN (multN a d) (multN b c))
+
+-- Negation: -(a-b)=(b-a)
+negI :: II -> II
+negI (II a b) = II b a
+
+-- Equality of integers
+instance Eq II where
+  (II a b) == (II c d) = (addN a d) == (addN b c)
 
 ----------------
 -- QQ Arithmetic
@@ -98,8 +113,7 @@ modN (S m) (T n) | (nn_pp n) == (modN m (T n)) = O
 -- Testing
 ----------
 main = do
-  print $ divN (S (S (S (S O)))) (T I)
-  print $ modN (S (S (S (S O)))) (T I)
+  print $ (II (S (S (S O))) O) == (II (S (S (S O))) O)
 
 
 
