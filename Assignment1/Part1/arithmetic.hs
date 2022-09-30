@@ -44,7 +44,9 @@ nn_pp I = S O
 nn_pp (T p) = S (nn_pp p)
 
 -- convert numbers of type PP to numbers of type II
--- ii_pp :: PP -> II
+ii_pp :: PP -> II
+ii_pp I = II (S O) O
+ii_pp (T p) = II (nn_pp (T p)) O
 
 ----------------
 -- NN Arithmetic
@@ -61,10 +63,16 @@ multN O m = O
 multN (S n) m = addN (multN n m) m
 
 -- division, eg 13 divided by 5 is 2 
--- divN :: NN -> PP -> NN
+divN :: NN -> PP -> NN
+divN O n = O
+divN (S m) (T n) | (nn_pp n) == (modN m (T n)) = S (divN m (T n))
+                | otherwise = divN m (T n)
 
 -- remainder, eg 13 modulo by 5 is 3
--- modN :: NN -> PP -> NN
+modN :: NN -> PP -> NN
+modN O n = O
+modN (S m) (T n) | (nn_pp n) == (modN m (T n)) = O
+                | otherwise = S (modN m (T n))
 
 ----------------
 -- II Arithmetic
@@ -90,6 +98,8 @@ multN (S n) m = addN (multN n m) m
 -- Testing
 ----------
 main = do
+  print $ divN (S (S (S (S O)))) (T I)
+  print $ modN (S (S (S (S O)))) (T I)
 
 
 
