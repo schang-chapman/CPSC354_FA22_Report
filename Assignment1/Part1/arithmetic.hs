@@ -126,6 +126,31 @@ normalizeI (II (S a) (S b)) = normalizeI (II a b)
 -- Converting between VM-numbers and Haskell-numbers
 ----------------------------------------------------
 
+-- Precondition: Inputs are non-negative
+nn_int :: Integer -> NN
+nn_int 0 = O
+nn_int n = S (nn_int (n-1))
+
+int_nn :: NN->Integer
+int_nn O = 0
+int_nn (S n) = 1 + int_nn n
+
+--ii_int :: Integer -> II
+
+--int_ii :: II -> Integer
+
+-- Precondition: Inputs are positive
+--pp_int :: Integer -> PP
+
+--int_pp :: PP->Integer
+
+--float_qq :: QQ -> Float
+
+------------------------------
+-- Normalisation by Evaluation
+------------------------------
+
+--nbe :: II -> II
 
 ----------
 -- Testing
