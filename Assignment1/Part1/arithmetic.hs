@@ -161,10 +161,16 @@ float_qq (QQ (II a b) (T c)) = (fromIntegral (int_nn a)) / (fromIntegral (int_pp
 -- Normalisation by Evaluation
 ------------------------------
 
---nbe :: II -> II
+nbe :: II -> II
+nbe (II a O) = (II a O)
+nbe (II O b) = (II O b)
+nbe (II a b) | int_nn(a) == int_nn(b) = (II O O)
+             | int_nn(a) > int_nn(b) = ii_int (int_nn(a) - int_nn(b))
+             | otherwise = ii_int (int_nn(b) - int_nn(a))
 
 ----------
 -- Testing
 ----------
 main = do
-  print $ float_qq (QQ (II (S O) O) (T I))
+  print $ normalizeI (II (S (S O)) (S O))
+  print $ nbe (II (S (S O)) (S O))
