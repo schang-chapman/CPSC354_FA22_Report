@@ -1,10 +1,12 @@
-# Why does LaTeX export have so much trash with it
+# Everything exports with too much garbage Jesus Christ
 
 *.aux
 *.log
 *.out
 *.synctex.gz
 *.toc
+
+/Assignment1/Part2/*
 
 # Code testing grounds
 test.hs
