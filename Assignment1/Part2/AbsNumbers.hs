@@ -14,8 +14,8 @@ data Exp
     | Div Exp Exp
     | Mod Exp Exp
     | Expon Exp Exp
-    | Sqrt Exp
     | Num Integer
     | Neg Exp
+    | Abs Exp
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
