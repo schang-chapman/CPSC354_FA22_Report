@@ -9,13 +9,13 @@ import qualified Prelude as C (Eq, Ord, Show, Read)
 
 data Exp
     = Plus Exp Exp
-    | Times Exp Exp
-    | Num Integer
     | Sub Exp Exp
-    | Neg Exp Exp
+    | Times Exp Exp
     | Div Exp Exp
-    | Expon Exp Exp
-    | Par Exp
     | Mod Exp Exp
+    | Expon Exp Exp
+    | Sqrt Exp
+    | Num Integer
+    | Neg Exp
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 

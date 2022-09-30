@@ -11,6 +11,7 @@ module ParNumbers
   , pExp
   , pExp1
   , pExp2
+  , pExp3
   ) where
 
 import Prelude
@@ -23,6 +24,7 @@ import LexNumbers
 %name pExp Exp
 %name pExp1 Exp1
 %name pExp2 Exp2
+%name pExp3 Exp3
 -- no lexer declaration
 %monad { Err } { (>>=) } { return }
 %tokentype {Token}
@@ -32,8 +34,10 @@ import LexNumbers
   ')'      { PT _ (TS _ 3) }
   '*'      { PT _ (TS _ 4) }
   '+'      { PT _ (TS _ 5) }
-  '/'      { PT _ (TS _ 6) }
-  '^'      { PT _ (TS _ 7) }
+  '-'      { PT _ (TS _ 6) }
+  '/'      { PT _ (TS _ 7) }
+  '//'     { PT _ (TS _ 8) }
+  '^'      { PT _ (TS _ 9) }
   L_integ  { PT _ (TI $$)  }
 
 %%
@@ -44,22 +48,26 @@ Integer  : L_integ  { (read $1) :: Integer }
 Exp :: { AbsNumbers.Exp }
 Exp
   : Exp '+' Exp1 { AbsNumbers.Plus $1 $3 }
-  | Exp '+' Exp1 { AbsNumbers.Sub $1 $3 }
+  | Exp '-' Exp1 { AbsNumbers.Sub $1 $3 }
   | Exp1 { $1 }
 
 Exp1 :: { AbsNumbers.Exp }
 Exp1
   : Exp1 '*' Exp2 { AbsNumbers.Times $1 $3 }
-  | Exp1 '*' Exp2 { AbsNumbers.Neg $1 $3 }
   | Exp1 '/' Exp2 { AbsNumbers.Div $1 $3 }
-  | Exp1 '^' Exp2 { AbsNumbers.Expon $1 $3 }
   | Exp1 '%' Exp2 { AbsNumbers.Mod $1 $3 }
   | Exp2 { $1 }
 
 Exp2 :: { AbsNumbers.Exp }
 Exp2
+  : Exp2 '^' Exp3 { AbsNumbers.Expon $1 $3 }
+  | '//' Exp2 { AbsNumbers.Sqrt $2 }
+  | Exp3 { $1 }
+
+Exp3 :: { AbsNumbers.Exp }
+Exp3
   : Integer { AbsNumbers.Num $1 }
-  | '(' Exp2 ')' { AbsNumbers.Par $2 }
+  | '-' Exp3 { AbsNumbers.Neg $2 }
   | '(' Exp ')' { $2 }
 
 {

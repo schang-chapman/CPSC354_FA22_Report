@@ -18,11 +18,11 @@ failure x = Left $ "Undefined case: " ++ show x
 transExp :: AbsNumbers.Exp -> Result
 transExp x = case x of
   AbsNumbers.Plus exp1 exp2 -> failure x
-  AbsNumbers.Times exp1 exp2 -> failure x
-  AbsNumbers.Num integer -> failure x
   AbsNumbers.Sub exp1 exp2 -> failure x
-  AbsNumbers.Neg exp1 exp2 -> failure x
+  AbsNumbers.Times exp1 exp2 -> failure x
   AbsNumbers.Div exp1 exp2 -> failure x
-  AbsNumbers.Expon exp1 exp2 -> failure x
-  AbsNumbers.Par exp -> failure x
   AbsNumbers.Mod exp1 exp2 -> failure x
+  AbsNumbers.Expon exp1 exp2 -> failure x
+  AbsNumbers.Sqrt exp -> failure x
+  AbsNumbers.Num integer -> failure x
+  AbsNumbers.Neg exp -> failure x

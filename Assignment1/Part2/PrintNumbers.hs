@@ -141,11 +141,11 @@ instance Print Double where
 instance Print AbsNumbers.Exp where
   prt i = \case
     AbsNumbers.Plus exp1 exp2 -> prPrec i 0 (concatD [prt 0 exp1, doc (showString "+"), prt 1 exp2])
+    AbsNumbers.Sub exp1 exp2 -> prPrec i 0 (concatD [prt 0 exp1, doc (showString "-"), prt 1 exp2])
     AbsNumbers.Times exp1 exp2 -> prPrec i 1 (concatD [prt 1 exp1, doc (showString "*"), prt 2 exp2])
-    AbsNumbers.Num n -> prPrec i 2 (concatD [prt 0 n])
-    AbsNumbers.Sub exp1 exp2 -> prPrec i 0 (concatD [prt 0 exp1, doc (showString "+"), prt 1 exp2])
-    AbsNumbers.Neg exp1 exp2 -> prPrec i 1 (concatD [prt 1 exp1, doc (showString "*"), prt 2 exp2])
     AbsNumbers.Div exp1 exp2 -> prPrec i 1 (concatD [prt 1 exp1, doc (showString "/"), prt 2 exp2])
-    AbsNumbers.Expon exp1 exp2 -> prPrec i 1 (concatD [prt 1 exp1, doc (showString "^"), prt 2 exp2])
-    AbsNumbers.Par exp -> prPrec i 2 (concatD [doc (showString "("), prt 2 exp, doc (showString ")")])
     AbsNumbers.Mod exp1 exp2 -> prPrec i 1 (concatD [prt 1 exp1, doc (showString "%"), prt 2 exp2])
+    AbsNumbers.Expon exp1 exp2 -> prPrec i 2 (concatD [prt 2 exp1, doc (showString "^"), prt 3 exp2])
+    AbsNumbers.Sqrt exp -> prPrec i 2 (concatD [doc (showString "//"), prt 2 exp])
+    AbsNumbers.Num n -> prPrec i 3 (concatD [prt 0 n])
+    AbsNumbers.Neg exp -> prPrec i 3 (concatD [doc (showString "-"), prt 3 exp])
