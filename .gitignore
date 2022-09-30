@@ -3,7 +3,6 @@
 *
 
 !.gitignore
-!README.md
 
 !report.pdf
 !report.tex
