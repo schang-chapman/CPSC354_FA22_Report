@@ -105,7 +105,9 @@ addQ (QQ (II a b) I) (QQ (II d e) I) = (QQ (addI (II a b) (II d e)) I)
 addQ (QQ (II a b) (T c)) (QQ (II d e) (T f)) = (QQ (addI (multI (II a b) (ii_pp (T f))) (multI (ii_pp (T c)) (II d e))) (multP (T c) (T f)))
 
 -- Multiplication: (a/b)*(c/d)=(ac)/(bd)
---multQ :: QQ -> QQ -> QQ
+multQ :: QQ -> QQ -> QQ
+multQ (QQ (II a b) I) (QQ (II d e) I) = (QQ (multI (II a b) (II d e)) I)
+multQ (QQ (II a b) (T c)) (QQ (II d e) (T f)) = (QQ (multI (II a b) (II d e)) (multP (T c) (T f)))
 
 -- Equality of fractions
 --instance Eq QQ where
@@ -125,5 +127,4 @@ addQ (QQ (II a b) (T c)) (QQ (II d e) (T f)) = (QQ (addI (multI (II a b) (ii_pp 
 -- Testing
 ----------
 main = do
-  print $ multP (I) (T I)
-  print $ addQ (QQ (II (S O) O) (T I)) (QQ (II (S O) O) (T I))
+  print $ multQ (QQ (II (S O) O) (T I)) (QQ (II (S O) O) (T I))
