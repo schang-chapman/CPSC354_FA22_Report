@@ -6,7 +6,7 @@
 *.synctex.gz
 *.toc
 
-/Assignment1/Part2/**
+/CPSC354_FA22_Report/Assignment1/Part2/**
 
 # Code testing grounds
 test.hs
