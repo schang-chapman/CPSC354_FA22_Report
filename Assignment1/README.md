@@ -1,4 +1,4 @@
-# Critical Appraisal
+# Assignment 1 Critical Appraisal
 
 ### Sharon Chang
 ### Submission Date: Sept. 30 2022
@@ -48,4 +48,9 @@ II (O) (S (S (S O)))
 The normalize by evalutaion simply converts both parts of the integer into Haskell integers. If they are equal, it returns II O O, otherwise, it will subtract part B of the integer from part A and convert that back into an II format integer.
 
 ## Part 2
+Following the order of PEMDAS, I set the addition and subtraction operations at the bottom of the order, as "Exp". After that, I put multiplication, division, and modulo in the "Exp1" tier, again, following PEMDAS. Given that modulo is related to division, I chose to group them together. After that were the number and negative operations, both at the top as "Exp3" grammars because they have to do with the fundamental value being sent into the calculator. Absolute value is included here because it is similar to the parentheses, which sit at the top of the PEMDAS order of operations. Therefore, I chose to put the absolute value at the top as well.
+
+It is worth noting that absolute value works on its own, but will not work in a nested series of functions. I believe this is not due to my implementation, but rather the nature of how Haskell handles its absolute value function, as that function cannot pass multiple integers through at once.
+
+Otherwise, there are no known bugs to speak of.
 
