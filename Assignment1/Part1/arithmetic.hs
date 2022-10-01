@@ -165,8 +165,7 @@ nbe :: II -> II
 nbe (II a O) = (II a O)
 nbe (II O b) = (II O b)
 nbe (II a b) | int_nn(a) == int_nn(b) = (II O O)
-             | int_nn(a) > int_nn(b) = ii_int (int_nn(a) - int_nn(b))
-             | otherwise = ii_int (int_nn(b) - int_nn(a))
+             | otherwise = ii_int (int_nn(a) - int_nn(b))
 
 ----------
 -- Testing
@@ -176,4 +175,4 @@ main = do
   print $ addQ (QQ (II (S (S O)) O) I) (QQ (II (S O) (S O)) I)
   print $ multQ (QQ (II (S (S O)) O) I) (QQ (II (S O) (S O)) I)
   print $ normalizeI (II (S (S O)) (S O))
-  print $ nbe (II (S (S O)) (S O))
+  print $ nbe (II (S O) (S (S O)))
