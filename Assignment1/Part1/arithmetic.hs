@@ -172,5 +172,8 @@ nbe (II a b) | int_nn(a) == int_nn(b) = (II O O)
 -- Testing
 ----------
 main = do
+  print $ (QQ (II (S (S O)) O) I) == (QQ (II (S O) (S O)) I)
+  print $ addQ (QQ (II (S (S O)) O) I) (QQ (II (S O) (S O)) I)
+  print $ multQ (QQ (II (S (S O)) O) I) (QQ (II (S O) (S O)) I)
   print $ normalizeI (II (S (S O)) (S O))
   print $ nbe (II (S (S O)) (S O))
