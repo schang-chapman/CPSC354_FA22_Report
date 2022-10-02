@@ -49,6 +49,9 @@
 \theoremstyle{remark}    
   \newtheorem{remark}[theorem]{Remark}
 
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+
 
 \title{CPSC-354 Report}
 \author{Sharon Chang  \\ Chapman University}
@@ -283,56 +286,18 @@ The word hanoi appears 31 times in the computation.
 & = {\rm hanoi} (n) ({\rm other}(x)(y)) (y)
 \end{align*}
 
-\subsection{Week 3}
-\begin{lstlisting}
-       Plus
-    /        \
-Integer    Integer
-  |            |
-  2            1
-\end{lstlisting}
+\subsection{Week 4}
+\includegraphics {hw4no1}
 
-\begin{lstlisting}
-       Plus
-    /        \
-Integer    Multiply
-  |         /    \
-  1         2    3
-\end{lstlisting}
+\includegraphics {hw4no2}
 
-\begin{lstlisting}
-       Plus
-    /        \
-Integer    Parentheses
-  |             |
-  1         Multiply
-              /   \
-        Integer   Integer
-             |     |
-             2     3
-\end{lstlisting}
+\includegraphics {hw4no3}
 
-\begin{lstlisting}
-               Multiply
-             /           \
-           Plus       Integer
-         /      \         |
-  Integer    Integer      3
-     |           |
-     1           2
-\end{lstlisting}
+\includegraphics {hw4no4}
 
-\begin{lstlisting}
-                             Plus
-                   /                     \
-               Plus                       Plus
-             /      \                   /      \
-     Integer    Multiply         Multiply       Integer
-          |      /     \          /     \          |
-          1 Integer Integer Integer Integer        6
-               |         |       |         |
-               2         3       4         5
-\end{lstlisting}
+\includegraphics {hw4no5}
+
+\subsection{Week 5}
 
 \section{Project}
 
