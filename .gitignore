@@ -7,7 +7,11 @@
 !report.pdf
 !report.tex
 
+!Assignment1/
 !numbers.cf
 !arithmetic.hs
 !Calculator.hs
 !Interpreter.hs
+
+!hw5/
+!lambda.cf
