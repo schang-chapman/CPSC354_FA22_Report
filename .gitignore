@@ -3,6 +3,7 @@
 *
 
 !.gitignore
+!README.md
 
 !report.pdf
 !report.tex
@@ -15,3 +16,4 @@
 
 !hw5/
 !lambda.cf
+!TestLambda.hs
