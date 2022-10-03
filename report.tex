@@ -340,6 +340,108 @@ x y z
 %
 \includegraphics {hw5no7}
 
+
+\begin{lstlisting}
+(\x.x) a
+a
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+\x.x a
+a
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.x) a b
+(\y) a b
+(\y a) b
+\y a b
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.y) a b
+(\x) a b
+(\x a) b
+\x a b
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.x) a b c
+(\y) a b c
+(\y a) b c
+(\y a b) c
+\y a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.y) a b c
+(\x) a b c
+(\x a) b c
+(\x a b) c
+\x a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.x) a (b c)
+(\y) a (b c)
+(\y a) (b c)
+\y a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.y) a (b c)
+(\x) a (b c)
+(\x a) (b c)
+\x a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.x) (a b) c
+(\y) (a b) c
+(\y a b) c
+\y a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.y) (a b) c
+(\x) (a b) c
+(\x a b) c
+\x a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.x) (a b c)
+(\y) (a b c)
+\y (a b c)
+\y a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+(\x.\y.y) (a b c)
+(\x) (a b c)
+\x (a b c)
+\x a b c
+\end{lstlisting}
+%
+
+\begin{lstlisting}
+evalCBN (EApp (\x.x) ((\y.y)a))
+   (\x.x) (a)
+   (a)
+\end{lstlisting}
+%
+
 \section{Project}
 
 Placeholder
