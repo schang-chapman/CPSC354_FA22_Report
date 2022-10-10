@@ -483,8 +483,11 @@ evalCBN (EApp (\x.x) ((\y.y)a))
 Placeholder
 
 \subsection{Specification}
+I want to make a program involving infinite lists in Haskell in order to generate lists of variable size and manipulate them. There are a variety of sequences in math similar to the Fibonacci sequence, and I will implement them as separate functions. The sequences being implemented will be arithmetic, geometric, triangular, square, cube, and Fibonacci.
 
-Placeholder
+Triangle, cube, square, and Fibonacci will work by taking in 1 integer number and generating a list of the sequence with the length of the given integer. For example, (fib 5) would generate a list containing the first 5 Fibonacci numbers. Arithmetic and geometric will take in 3 integer numbers. The first integer works the same as the other sequences, where it dictates the list's length. The 2nd number will be the first entry of the list and the 3rd number will be the number added to each entry. For example, (arit 3 1 6) will produce the list [1, 7, 13]. In geometric, the 2nd number works the same but 3rd number will be the number multiplied against the given value to continue the list. For example, (geo 3 1 6) will produce the list [1, 6, 36].
+
+These lists can have mathematical operations performed between them, which will result in a new list. The available operations will be addition, subtraction, multiplication, and integer division. When performing mathematical operations between lists of different lengths, the resulting list will be the length of the longer list. The shorter list will be extended with 0 values to fill it out to match the length of the longer list. For example, adding the lists [2, 4, 8, 16] and the list [1, 2, 3] will be the same as adding the lists [2, 4, 8, 16] and [1, 2, 3, 0], resulting in the list [3, 6, 11, 16].
 
 \subsection{Prototype}
 
