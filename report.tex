@@ -298,149 +298,8 @@ The word hanoi appears 31 times in the computation.
 \includegraphics {hw4no5}
 
 \subsection{Week 5}
-\begin{lstlisting}
-x
-\end{lstlisting}
-%
-\includegraphics {hw5no1}
 
-\begin{lstlisting}
-x y
-\end{lstlisting}
-%
-\includegraphics {hw5no2}
-
-\begin{lstlisting}
-x y z
-\end{lstlisting}
-%
-\includegraphics {hw5no3}
-
-\begin{lstlisting}
-\ x . x
-\end{lstlisting}
-%
-\includegraphics {hw5no4}
-
-\begin{lstlisting}
-\ x . x x
-\end{lstlisting}
-%
-\includegraphics {hw5no5}
-
-\begin{lstlisting}
-\ x . \ y . x y (\ x . x) z
-\end{lstlisting}
-%
-\includegraphics {hw5no6}
-
-\begin{lstlisting}
-\ x . \ y . x y z a b c
-\end{lstlisting}
-%
-\includegraphics {hw5no7}
-
-
-\begin{lstlisting}
-(\x.x) a
-a
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-\x.x a
-a
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.x) a b
-(\y) a b
-(\y a) b
-\y a b
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.y) a b
-(\x) a b
-(\x a) b
-\x a b
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.x) a b c
-(\y) a b c
-(\y a) b c
-(\y a b) c
-\y a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.y) a b c
-(\x) a b c
-(\x a) b c
-(\x a b) c
-\x a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.x) a (b c)
-(\y) a (b c)
-(\y a) (b c)
-\y a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.y) a (b c)
-(\x) a (b c)
-(\x a) (b c)
-\x a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.x) (a b) c
-(\y) (a b) c
-(\y a b) c
-\y a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.y) (a b) c
-(\x) (a b) c
-(\x a b) c
-\x a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.x) (a b c)
-(\y) (a b c)
-\y (a b c)
-\y a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-(\x.\y.y) (a b c)
-(\x) (a b c)
-\x (a b c)
-\x a b c
-\end{lstlisting}
-%
-
-\begin{lstlisting}
-evalCBN (EApp (\x.x) ((\y.y)a))
-   (\x.x) (a)
-   (a)
-\end{lstlisting}
-%
+Placeholder
 
 \subsection{Week 6}
 \begin{lstlisting}
@@ -477,6 +336,26 @@ evalCBN (EApp (\x.x) ((\y.y)a))
 =
 ((\x. (\x2. (x (x (x (x (x (x ((x (x (x x))) x2))))))))))
 \end{lstlisting}
+
+\subsection{Week 7}
+
+In lines 5-7 the variables e1 and e2 are bound by evalCBN with the scope being the body of the evalCBN function. The variables i and e3 are free. In lines 18-22 the variables id1, e1, and s are bound by subst with the scope being body of the subst function. The variables f and e2 are free.
+
+\begin{lstlisting}
+evalCBN (\x.x)((\y.y)a) = line 6
+evalCBN ((\y.y)a) = line 7
+evalCBN (a) = line 8
+a
+\end{lstlisting}
+\begin{lstlisting}
+evalCBN (\x.\y.x) y z = line 6
+evalCBN (\y.y) z = line 7
+evalCBN (z) = line 8
+z
+\end{lstlisting}
+
+\includegraphics {hw7p1}
+\includegraphics {hw7p2}
 
 \section{Project}
 
