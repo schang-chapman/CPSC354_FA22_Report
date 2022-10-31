@@ -360,6 +360,23 @@ No, because adding unique normal forms would break the looping equivalency relat
 \medskip\noindent
 The existint normal forms of a and b reduce duplicates into into singular forms. The ARS as a whole is a reversing function that will reverse a given string while reducing its duplicates.
 
+\subsection{Week 9}
+For my project, the two major parts will be the list generating functions and the list arithmetic functions. I will give myself the deadline of November 13th to complete the 4 list generating functions (triangle, cube, square, and fibonacci). Then, I will give myself the deadline of December 4th to complete the list artihmetic functions, but at this point they will only work with lists of the same length. I suspect that my method of augmenting lists in order to perform arithmetic between lists of different lengths will need time. Therefore, I will give myself until December 11th to figure out how to make lists of different lengths compatible in my arithmetic functions. This will give me all of finals week to do any finishing touches and complete the report details.
+
+\medskip\noindent
+The ruleset is nonterminating because the first half of the rules can be used to form an infinite loop. It is non-confluent because diverging paths taken will not meet back up, there is no way to form compatible peaks and valleys. It does not have unique normal forms because while everything does have reducible forms, there are multiple ways to reduce to b or an empty list, making them non-unique.
+
+\medskip\noindent
+The invariants are:
+length
+number of a's
+number of b's
+number of c's
+number of a's = number of b's = number of c's
+
+number of a's + number of c's = number of b's
+I feel like there's more after this but I'm stumped.
+
 \section{Project}
 
 Placeholder
