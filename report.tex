@@ -390,6 +390,30 @@ number of a's + number of c's = number of b's
 \medskip\noindent
 I feel like there's more after this but I'm stumped.
 
+\subsection{Week 10}
+Placeholder
+
+\subsection{Week 11}
+Questions and answers to questions surrounding this paper:
+
+\medskip\noindent
+https://www.cs.tufts.edu/~nr/cs257/archive/simon-peyton-jones/contracts.pdf
+
+\medskip\noindent
+Q (From myself): How would this handle contracts with multiple conditions that would affect one another and, in turn, affect the outcome of the contract? Often contracts come with many overlapping conditions that are difficult for an ordinary, non-lawyer person to parse. In such scenarios, how would one teach a computer to interpret such conditions? Would it be possible to establish something like a universal  default PEMDAS hierarchy for your conditions, in which case how flexible should the language be in allowing the user to alter the hierarchy when making their contract?
+
+\medskip\noindent
+Q (From Marc Domingo): Do the benefits of designing/creating a Domain Specific Language specifically for financial contracts outweigh representing financial contracts by abstracting and extending them through a template class containing values and functions in a high-level programming language?
+
+\medskip\noindent
+A: Having a language specifically tailored for this purpose could help with being able to provide a more specialized tool to construct contracts with. For example, you could technically build a database using high level programming languages, but it would be better to use a specialized language for it, e.g., SQL, because of how it is already built to handle databases. Similarly, even though you could build a method of handling contracts through a high-level programming language, it could be more helpful to have a specialized language for it that is already built to handle a lot of the common cases that you will encounter in your work.
+
+\medskip\noindent
+Q (From Cole Matsueda): How do Combinator Libraries and DSL's take into account for human behavior/constraints? (Late payments,  partial payments)
+
+\medskip\noindent
+A: Human factors would definitely muddy the waters, particularly in cases where the factors at play are very vague and much more difficult to enforce. Late or partial payments would be a problem that could be solved with good default cases like Cecilia mentioned as well as integrating a more complex web of how conditions in a contract can work. However, in cases such as an NDA, it would be very difficult to encode that into a language on account of how difficult it would be for a computer to understand whether or not the concept protected by the NDA has been leaked or not.
+
 \section{Project}
 
 Placeholder
