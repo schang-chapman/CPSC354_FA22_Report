@@ -3,12 +3,14 @@
 ----------------------------------------------
 
 -- Arithmetic
--- arith :: Integer -> Integer -> Integer -> [Integer]
--- TODO
+arith :: Integer -> Integer -> Integer -> [Integer]
+arith l s n = [s, s+n..s+n*(l-1)]
 
 -- Geometric
--- geo :: Integer -> Integer -> Integer -> [Integer]
--- TODO
+geo :: Integer -> Integer -> Integer -> [Integer]
+geo l s n | l == 0 = []
+          | l == 1 = [s]
+          | otherwise = s : geo (l-1) (s*n) n
 
 -- Triangle
 tri :: Integer -> [Integer]
@@ -60,9 +62,12 @@ fib l = map fib [0..l-1]
 main = do
   -- Function Tests
 
-  -- Arithmetic
-  -- Geometric
-  print $ tri 4
+  -- print $ arith 3 1 6
+  print $ geo 0 1 6
+  print $ geo 1 1 6
+  print $ geo 2 1 6
+  print $ geo 3 1 6
+  -- print $ tri 4
   -- print $ sqr 5
   -- print $ cube 5
   -- print $ fib 5
