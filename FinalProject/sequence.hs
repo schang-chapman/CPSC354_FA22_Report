@@ -3,23 +3,24 @@
 ----------------------------------------------
 
 -- Arithmetic
-arith :: Integer -> Integer -> Integer -> [Integer]
+-- arith :: Integer -> Integer -> Integer -> [Integer]
 -- TODO
 
 -- Geometric
-geo :: Integer -> Integer -> Integer -> [Integer]
+-- geo :: Integer -> Integer -> Integer -> [Integer]
 -- TODO
 
 -- Triangle
-square :: Integer -> [Integer]
+-- tri :: Integer -> [Integer]
 -- TODO
 
 -- Square
-square :: Integer -> [Integer]
--- TODO
+sqr :: Integer -> [Integer]
+sqr l = map (^2) [1..l]
 
 -- Cube
 cube :: Integer -> [Integer]
+cube l = map (^3) [1..l]
 -- TODO
 
 -- Fibonacci
@@ -58,13 +59,13 @@ main = do
   -- Arithmetic
   -- Geometric
   -- Triangle
-  -- Square
-  -- Cube
-  print $ fib 5
+  -- print $ sqr 5
+  -- print $ cube 5
+  -- print $ fib 5
 
   -- Addition
   -- Subtraction
   -- Multiplication
   -- Division
-  
+
   -- Extension
