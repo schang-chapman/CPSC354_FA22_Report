@@ -60,23 +60,19 @@ fib l = map fib [0..l-1]
 -- Test Cases
 -------------
 main = do
-  -- Function Tests
-
-  -- print $ arith 3 1 6
-  print $ geo 0 1 6
-  print $ geo 1 1 6
-  print $ geo 2 1 6
+  -- Function Tests --
+  print $ arith 3 1 6
   print $ geo 3 1 6
-  -- print $ tri 4
-  -- print $ sqr 5
-  -- print $ cube 5
-  -- print $ fib 5
+  print $ tri 4
+  print $ sqr 5
+  print $ cube 5
+  print $ fib 5
 
-  -- List Arithmetic Tests
-
+  -- List Arithmetic Tests --
   -- Addition
   -- Subtraction
   -- Multiplication
   -- Division
 
-  -- Extension
+  -- Extension --
+  -- TODO
