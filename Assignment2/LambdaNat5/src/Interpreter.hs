@@ -16,11 +16,15 @@ evalCBN (EIf e1 e2 e3 e4) = if (evalCBN e1) == (evalCBN e2) then evalCBN e3 else
 evalCBN (ELet i e1 e2) = evalCBN (EApp (EAbs i e2) e1) 
 evalCBN (ERec i e1 e2) = evalCBN (EApp (EAbs i e2) (EFix (EAbs i e1)))
 evalCBN (EFix e) = evalCBN (EApp e (EFix e)) 
--- evalCBN ENil 
--- evalCBN (ECons e1 e2) 
--- evalCBN (EHd e) 
--- evalCBN (ETl e) 
--- evalCBN (ELE e1 e2)
+evalCBN ENil = ENil
+evalCBN (ECons e1 e2) = ECons (evalCBN e1) (evalCBN e2)
+evalCBN (EHd e) = case (evalCBN e) of
+    (ECons e1 e2) -> e1
+    e1 -> e1
+evalCBN (ETl e) = case (evalCBN e) of
+    (ECons e1 e2) -> e2
+    e1 -> e1
+evalCBN (ELE e1 e2) = if (evalCBN e1) <= (evalCBN e2) then EInt 1 else EInt 0
 evalCBN (EPlus e1 e2) = case (evalCBN e1) of
     (EInt n) -> case (evalCBN e2) of
         (EInt m) -> EInt (n+m)
@@ -73,4 +77,9 @@ subst id s (EInt n) = EInt n
 subst id s (EPlus e l) = EPlus (subst id s e) (subst id s l)
 subst id s (EMinus e l) = EMinus (subst id s e) (subst id s l)
 subst id s (ETimes e l) = ETimes (subst id s e) (subst id s l)
--- add the missing cases
+
+subst id s ENil = ENil
+subst id s (ECons e l) = ECons (subst id s e) (subst id s l)
+subst id s (EHd e) = EHd (subst id s e)
+subst id s (ETl e) = ETl (subst id s e)
+subst id s (ELE e l) = ELE (subst id s e) (subst id s l)
