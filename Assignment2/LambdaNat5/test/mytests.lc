@@ -1,0 +1,12 @@
+// hd x:y:z:#
+// tl x:y:z:#
+
+// (hd x:y:z:#):a:b:c:#
+// (tl x:y:z:#):a:b:c:#
+
+// hd ((\ x. \y . x : y) a b : #)
+// tl ((\ x. \y . x : y) a b : #)
+
+// 5 less_equal 4
+// 2 less_equal 8
+// 6 less_equal 6
