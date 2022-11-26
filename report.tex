@@ -77,6 +77,8 @@ Placeholder
 
 \subsection{Week 1}
 
+In order to familiarizae myself with LaTex, I was instructed to create a program to calculate the greatest common denominator of any two numbers in any programming language of my choice. I chose to write my GCD program in Python.
+
 \begin{lstlisting}
 def numInput():
     while True:
@@ -110,15 +112,14 @@ result = gcd(numA, numB)
 print("The GCD of " + str(numA) + " and " + str(numB) + " is: " + str(result) + ".")
 \end{lstlisting}
 %
-I chose to write my GCD program in Python.
-
-\medskip\noindent
 The numInput function first gets inputs from the user and makes sure that they are valid inputs to perform the gcd function on. The while loop traps the user until they input a valid non-zero integer. This repeats twice to obtain two numbers.
 
 \medskip\noindent
 After that, the two numbers are put into the gcd function. If number A is greater than number B, it recursively calls on the function again to find the GCD between the difference of A and B and number B. If number B is greater than number A, it recursively calls on the function again to find the GCD between number A and the difference of B and A. This repeats until the two numbers being compared are equal, after which the function returns the equal number. This equal number is the GCD of the two given numbers. This recursive function works because the method of subtraction will repeatedly lower the numbers until they inevitably equal out to yield a result.
 
 \subsection{Week 2}
+
+After familiarizing myself with LaTex, I then had to familiarize myself with Haskell. I created a series of recursive functions in Haskell which are listed below, followed by explanations for how they work.
 
 \begin{lstlisting}
 select_evens [] = []
@@ -217,6 +218,26 @@ less_equal [1,1,4] [1,2,3] =
 \end{lstlisting}
 
 \subsection{Week 3}
+
+The hanoi function takes 3 number inputs, which are the number of disks, the starting location, and the end location, in that order. It recursively calls on itself until the number of disks is reduced to one, upon which the move function is called. The move function has 2 inputs, the starting location and the ending location. It only moves the topmost disk of that location.
+
+\medskip\noindent
+The following demonstrates the hanoi and move functions as mathematical equations.
+
+\begin{align*}
+{\rm hanoi} (1) (x) (y)
+& = {\rm move}(x)(y)
+\end{align*}
+\begin{align*}
+{\rm hanoi} (n+1) (x) (y)
+& = {\rm hanoi} (n) (x) ({\rm other}(x)(y)) \\
+& = {\rm move}(x)(y)\\
+& = {\rm hanoi} (n) ({\rm other}(x)(y)) (y)
+\end{align*}
+
+\medskip\noindent
+The following code demonstrates the recursive steps used when executing a function to solve a Hanoi tower problem of 5 disks.
+
 \begin{lstlisting}
 hanoi 5 0 2
 	hanoi 4 0 1
@@ -274,24 +295,105 @@ Move the top disk from Pole 1 to Pole 3. Next, move the next top disk from Pole 
 \medskip\noindent
 The word hanoi appears 31 times in the computation.
 
-\medskip\noindent
-\begin{align*}
-{\rm hanoi} (1) (x) (y)
-& = {\rm move}(x)(y)
-\end{align*}
-\begin{align*}
-{\rm hanoi} (n+1) (x) (y)
-& = {\rm hanoi} (n) (x) ({\rm other}(x)(y)) \\
-& = {\rm move}(x)(y)\\
-& = {\rm hanoi} (n) ({\rm other}(x)(y)) (y)
-\end{align*}
-
 \subsection{Week 4}
+
+The following demonstrates the syntax trees for various arithmetic expressions. The expression being demonstrated is at the top right corner of each section, with two trees below it. The right tree is the concrete syntax tree, and the left is the abstract syntax tree.
+
 \includegraphics {hw4}
 
 \subsection{Week 5}
 
-Placeholder
+There is a folder called "hw5" in the repository that this folder is contained in. Using the grammar and interpreter contained within, I generated linearized abstract syntax trees for various Lambda expressions, then made 2D trees of them as seem below.
+
+\includegraphics{hw5}
+
+\medskip\noindent
+Additionally, the following includes examples of various lambda expressions evaluated by hand.
+
+\begin{lstlisting}
+Expression: (\x.x) a =
+a
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: \x.x a =
+\x.x a
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.x) a b =
+(\y.a) b =
+a
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.y) a b =
+(\y.y) b =
+b
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.x) a b c =
+(\y.a) b c =
+(a) c =
+a c
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.y) a b c =
+(\y.y) b c =
+(b) c =
+b c
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.x) a (b c) =
+(\y.a) (b c) =
+a
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.y) a (b c) =
+(\y.y) (b c) =
+b c
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.x) (a b) c =
+(\y.(a b)) c =
+(a b) =
+a b
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.y) (a b) c =
+(\y.y) c =
+c
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.x) (a b c) =
+(\y.(a b c)) =
+\y.(a b c)
+\end{lstlisting}
+
+\begin{lstlisting}
+Expression: (\x.\y.y) (a b c) =
+(\y.y) =
+\y.y
+\end{lstlisting}
+%
+Now, I will demonstrate how the interpreter from LambdaNat0 of Assignment 2 (also found in the same repository as this report) evaluates Lambda expressions via the evalCBN function. Each step is accompanied by the line number of the Interpreter.hs code that performs that step.
+
+\begin{lstlisting}
+evalCBN ((\x.x)((\y.y)a)) = 
+evalCBN (EAbs (Id "x") (EAbs (Id "y") (EVar (Id "a")))) = Line 13
+evalCBN (subst (Id "x") (EAbs (Id "y") (EVar (Id "a"))) (EVar (Id "x"))) = Line 67
+evalCBN (EAbs (Id "y") (EVar (Id "a"))) = Line 13
+evalCBN (subst (Id "y") (EVar (Id "a")) (EVar (Id "y"))) = Line 64
+evalCBN a = Line 50
+a
+\end{lstlisting}
 
 \subsection{Week 6}
 \begin{lstlisting}
