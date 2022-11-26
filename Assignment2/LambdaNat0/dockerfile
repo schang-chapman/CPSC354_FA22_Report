@@ -2,7 +2,6 @@
 # docker build -t haskell-pl . 
 # docker run -it --rm haskell-pl
 FROM haskell:8
-COPY . .
 WORKDIR /
 RUN cabal update;
 RUN cabal install BNFC;
