@@ -305,7 +305,8 @@ The following demonstrates the syntax trees for various arithmetic expressions. 
 
 There is a folder called "hw5" in the repository that this folder is contained in. Using the grammar and interpreter contained within, I generated linearized abstract syntax trees for various Lambda expressions, then made 2D trees of them as seem below.
 
-\includegraphics{hw5}
+\includegraphics{hw5p1}
+\includegraphics{hw5p2}
 
 \medskip\noindent
 Additionally, the following includes examples of various lambda expressions evaluated by hand.
@@ -447,7 +448,7 @@ evalCBN (\y.y) z = line 7
 evalCBN (z) = line 8
 z
 \end{lstlisting}
-
+%
 Placeholder [Re-add trees later]
 
 \subsection{Week 8}
@@ -496,25 +497,47 @@ I feel like there's more after this but I'm stumped.
 Placeholder
 
 \subsection{Week 11}
-Questions and answers to questions surrounding this paper:
+The following short essay discusses this paper:
 
 \medskip\noindent
 https://www.cs.tufts.edu/~nr/cs257/archive/simon-peyton-jones/contracts.pdf
 
 \medskip\noindent
-Q (From myself): How would this handle contracts with multiple conditions that would affect one another and, in turn, affect the outcome of the contract? Often contracts come with many overlapping conditions that are difficult for an ordinary, non-lawyer person to parse. In such scenarios, how would one teach a computer to interpret such conditions? Would it be possible to establish something like a universal  default PEMDAS hierarchy for your conditions, in which case how flexible should the language be in allowing the user to alter the hierarchy when making their contract?
+Placeholder
 
-\medskip\noindent
-Q (From Marc Domingo): Do the benefits of designing/creating a Domain Specific Language specifically for financial contracts outweigh representing financial contracts by abstracting and extending them through a template class containing values and functions in a high-level programming language?
+\subsection{Week 12}
+The following section demonstrates Hoare logic analysis as applied to the code below.
 
-\medskip\noindent
-A: Having a language specifically tailored for this purpose could help with being able to provide a more specialized tool to construct contracts with. For example, you could technically build a database using high level programming languages, but it would be better to use a specialized language for it, e.g., SQL, because of how it is already built to handle databases. Similarly, even though you could build a method of handling contracts through a high-level programming language, it could be more helpful to have a specialized language for it that is already built to handle a lot of the common cases that you will encounter in your work.
+\begin{lstlisting}
+while (x!=0) do z:=z*y;  x:= x-1 done
+\end{lstlisting}
+%
+We know that the program must terminate because the condition of the while loop is x not equaling 0, which x will inevitably reach on account of it being decremented with each loop. Let us assume that the variables are initialized as x = 100, y = 2, and z = 1. We will treat the variable t as a count for how many times the loop has been executed. It follows that x + t must always equal 100, as x is decremented by 1 while t is incremented by 1 with each loop. The variable y is never edited during the loop, so it will always stay at 2. The variable z is multiplied by y with each loop, being initialized as 1 but increasing to 2, then 4, then 8, then 16, and so on and so forth until the loop completes itself. This pattern reflects the exponents of 2, therefore one can write the relationship between z and y as z = y$^t$. This gives us two equations to work with.
 
-\medskip\noindent
-Q (From Cole Matsueda): How do Combinator Libraries and DSL's take into account for human behavior/constraints? (Late payments,  partial payments)
+\begin{align*}
+t + x = 100
+\end{align*}
+\begin{align*}
+z = y^t
+\end{align*}
+%
+Logically, we can put these equations to yield a single invariant equation.
 
-\medskip\noindent
-A: Human factors would definitely muddy the waters, particularly in cases where the factors at play are very vague and much more difficult to enforce. Late or partial payments would be a problem that could be solved with good default cases like Cecilia mentioned as well as integrating a more complex web of how conditions in a contract can work. However, in cases such as an NDA, it would be very difficult to encode that into a language on account of how difficult it would be for a computer to understand whether or not the concept protected by the NDA has been leaked or not.
+\begin{align*}
+z = y^{(100 - x)}
+\end{align*}
+%
+Now that we have the invariant, we will move on to discuss the preconditions and postconditions of our example code. The precondition of this loop running is that x must equal some positive integer above 0 and z must equal 1. The equation presented above is our postcondition that results from the termination of our program. It is worth noting that the 100 in our above invariant equation is merely a stand-in for whatever value x is initialized with. This results in the following Hoare triple.
+
+\begin{align*}
+\{x \ge 0 \: \Lambda \: z = 1\} \; {\rm while} \: (x!=0) \: {\rm do} \: z:=z*y; \: x:= x-1 \: {\rm done} \; \{z = y^x\}
+\end{align*}
+%
+However, this only accounts for certain values of x and z. Taking the prior example initialization values of x = 100 and y = 2 but changing z to z =  5, we would see the pattern of 10, 20, 40, etc. One sees that this pattern reflects the earlier pattern except everything is now multiplied by 5. Therefore, it is better rewritten as follows to account for the variables having different values.
+
+\begin{align*}
+\{x = a \: \Lambda \: y = b \: \Lambda \: z = c\} \; {\rm while} \: (x!=0) \: {\rm do} \: z:=z*y; \: x:= x-1 \: {\rm done} \; \{z = c * b^a\}
+\end{align*}
 
 \section{Project}
 
