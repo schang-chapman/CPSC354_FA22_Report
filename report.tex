@@ -305,8 +305,8 @@ The following demonstrates the syntax trees for various arithmetic expressions. 
 
 There is a folder called "hw5" in the repository that this folder is contained in. Using the grammar and interpreter contained within, I generated linearized abstract syntax trees for various Lambda expressions, then made 2D trees of them as seem below.
 
-\includegraphics{hw5p1}
-\includegraphics{hw5p2}
+\includegraphics[width=\linewidth]{hw5p1}
+\includegraphics[width=\linewidth]{hw5p2}
 
 \medskip\noindent
 Additionally, the following includes examples of various lambda expressions evaluated by hand.
@@ -397,59 +397,81 @@ a
 \end{lstlisting}
 
 \subsection{Week 6}
+
+The following demonstrates the evaluation of the exponent expression 2$^3$.
+
 \begin{lstlisting}
 (\exp . \two . \three . exp two three)
 (\m.\n. m n)
 (\f.\x. f (f x))
 (\f.\x. f (f (f x)))
 =
-((\m.\n. m n) (\f.\x. f (f x)) (\f2.\x2. f2 (f2 (f2 x2))))
+(\m.\n. m n) (\f.\x. f (f x)) (\f2.\x2. f2 (f2 (f2 x2)))
 =
-((\n. (\f.\x. f (f x)) n) (\f2.\x2. f2 (f2 (f2 x2))))
+(\n. (\f.\x. f (f x)) n) (\f2.\x2. f2 (f2 (f2 x2)))
 =
-(((\f.\x. f (f x)) (\f2.\x2. f2 (f2 (f2 x2)))))
+((\f.\x. f (f x)) (\f2.\x2. f2 (f2 (f2 x2))))
 =
-(((\x. (\f2.\x2. f2 (f2 (f2 x2))) ((\f2.\x2. f2 (f2 (f2 x2))) x))))
+((\x. (\f2.\x2. f2 (f2 (f2 x2))) ((\f2.\x2. f2 (f2 (f2 x2))) x)))
 =
-(((\x. (\x2. ((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))))
+((\x. (\x2. ((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))
 =
-(((\x. (\x2. ((\x2. x (x (x x2)))) (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))))
+(\x. (\x2. ((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))
 =
-(((\x. (\x2. (\x2. x (x (x x2))) (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))))
+(\x. (\x2. ((\x2. x (x (x x2)))) (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))
 =
-(((\x. (\x2. (x (x (x (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))))))
+(\x. (\x2. (\x2. x (x (x x2))) (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))
 =
-(((\x. (\x2. (x (x (x (((\x2. x (x (x x2)))) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))))))
+(\x. (\x2. (x (x (x (((\f2.\x2. f2 (f2 (f2 x2))) x) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))))
 =
-(((\x. (\x2. (x (x (x ((\x2. x (x (x x2))) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))))))
+(\x. (\x2. (x (x (x (((\x2. x (x (x x2)))) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))))
 =
-(((\x. (\x2. (x (x (x ((x (x (x (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))))))))))
+(\x. (\x2. (x (x (x ((\x2. x (x (x x2))) (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))))
 =
-(((\x. (\x2. (x (x (x ((x (x (x (((\x2. x (x (x x2))) x) x2))))))))))))
+(\x. (\x2. (x (x (x ((x (x (x (((\f2.\x2. f2 (f2 (f2 x2))) x) x2))))))))))
 =
-(((\x. (\x2. (x (x (x ((x (x (x (((x (x (x x)))) x2))))))))))))
+(\x. (\x2. (x (x (x (x (x (x (((\f2.\x2. f2 (f2 (f2 x2))) x) x2)))))))))
 =
-((\x. (\x2. (x (x (x (x (x (x ((x (x (x x))) x2))))))))))
+(\x. (\x2. (x (x (x (x (x (x (((\x2. x2 (x2 (x2 x2))) x))))))))))
+=
+(\x. (\x2. (x (x (x (x (x (x (((x (x (x x)))))))))))))
+=
+(\x. (\x2. (x (x (x (x (x (x (x (x (x x)))))))))))
 \end{lstlisting}
 
 \subsection{Week 7}
 
-In lines 5-7 the variables e1 and e2 are bound by evalCBN with the scope being the body of the evalCBN function. The variables i and e3 are free. In lines 18-22 the variables id1, e1, and s are bound by subst with the scope being body of the subst function. The variables f and e2 are free.
+Returning to the evalCBN function in LambdaNat0 of Assignment 2, I will now examine the variables of that function.
+
+\medskip\noindent
+In line 5 the variables e1 and e2 are bound on the left of the equal sign with their scope being the body of the evalCBN function (through the end of line 7). The variables i and e3 in line 6 are bound on the left of the arrow sign and their scope is to the end of that line. Similarly, in line 7, e3 is bound to the left of the arrow sign and the scope is also to the end of that line. In line 8, x is then bound to the left of the equal sign and its scope is the end of line 8.
+
+\medskip\noindent
+In line 18 the variables id, id1, e1, and s are bound on the left of the equal sign with the scope being body of the subst function (through the end of line 22). The variable f in line 20 is also bound to the left of its equal sign. The variable e2 in line 21 is also bound to the left of its equal sign. Both f and e2 have scopes reaching the end of line 22.
+
+\medskip\noindent
+The following demonstrates an example of the the evalCBN function at work using abstract syntax in the same manner as demonstrated in the section Week 5. The line numbers refer to Interpreter-fragment.hs within LambdaNat0 this time.
 
 \begin{lstlisting}
-evalCBN (\x.x)((\y.y)a) = line 6
-evalCBN ((\y.y)a) = line 7
-evalCBN (a) = line 8
-a
-\end{lstlisting}
-\begin{lstlisting}
-evalCBN (\x.\y.x) y z = line 6
-evalCBN (\y.y) z = line 7
-evalCBN (z) = line 8
+evalCBN ((\x.\y.x) y z) =
+evalCBN ((EAbs (Id "x") (EAbs (Id "y") EVar (Id "x"))) EVar (Id "y") EVar (Id "z")) = Line 6
+evalCBN (subst (Id "x") (EVar (Id "y")) (EAbs (Id "y") EVar (Id "x")) = Line 18
+evalCBN (EAbs (Id "a") (EVar (Id "y"))) = Line 21
+evalCBN ((EAbs (Id "a") (EVar (Id "y"))) (EVar (Id "z"))) = Line 22
+evalCBN (subst (EVar (Id "a")) (EVar (Id "z")) (EVar (Id "y))) = Line 6
+evalCBN (EVar (Id "z")) = Line 15
 z
 \end{lstlisting}
 %
-Placeholder [Re-add trees later]
+The following demonstrates the various properties of abstract reduction sequences.
+
+\includegraphics[width=\linewidth]{hw7a}
+
+\medskip\noindent
+Here are examples fulfilling every combination of ARS properties, where possible.
+
+\includegraphics[width=\linewidth]{hw7b}
+
 
 \subsection{Week 8}
 This ARS does not terminate because the rules ba -> ab and ab -> ba will loop with each other infinitely.
