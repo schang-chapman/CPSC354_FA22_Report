@@ -28,12 +28,24 @@ rec even = \x.
 
 rec append = \x. \y.
     case x of {
-        [] -> [y],
-        (a:as) -> a:(append as y)
+        [] -> y,
+        (a:as) -> case y of {
+            [] -> x,
+            (b:bs) -> a : (append as y)
+        }
     };;
 
 rec reverse = \x.
     case x of {
         [] -> x,
-        (a:as) -> append (reverse as) a
+        (a:as) -> append (reverse as) [a]
+    };;
+
+rec weave = \x. \y.
+    case x of {
+        [] -> y,
+        (a:as) -> case y of {
+            [] -> x,
+            (b:bs) -> append [a,b] (weave as bs)
+        }
     };;

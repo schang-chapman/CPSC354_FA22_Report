@@ -1,4 +1,82 @@
 :quit
+weave [1,2,3] [4,5,6];;
+append [1,2,3] [4,5,6];;
+reverse [0,1,2,3] ;;
+:load test/solutions.lc
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+weave [1,2,3] [4,5,6];;
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:load test/solutions.lc
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:quit
+weave [1,2,3] [4,5,6] ;;
+:load test/solutions.lc
+:quit
+weave [1,2,3] [4,5,6];;
+weave [1,2,3] [4,5,6];
+weave [1,2,3] [4,5,6]
+:reload test/solutions.lc
+:reload test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:reload test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:load test/solutions.lc
+:quit
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:quit
+weave [1,2,3] [4,5,6];;
+:reload test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:reload test/solutions.lc
+:reload test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:quit
+weave [1,2,3] [4,5,6];;
+:reload test/solutions.lc
+:reload test/solutions.lc
+:reload test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:reload test/solutions.lc
+weave [1,2,3] [4,5,6];;
+:load test/solutions.lc
+:quit
+weave [1,2,3] [];;
+weave [] [1,2,3];;
+:load test/solutions.lc
+:load test/solutions.lc
+:load test/solutions.lc
+:load test/solutions.lc
+:quit
 :exit
 reverse [0,1,2,3,4] ;;
 reverse [0,1,2,3,4]
@@ -20,81 +98,3 @@ even [];;
 :reload test/solutions.lc
 even [1,2,3];;
 even [];;
-:load test/solutions.lc
-:quit
-even [1,2,3];;
-:reload test/solutions.lc
-even [1,2,3];;
-:reload test/solutions.lc
-even [1,2,3];;
-even [];;
-:reload test/solutions.lc
-:reload test/solutions.lc
-even [];;
-:load test/solutions.lc
-:quit
-even [] ;;
-:reload test/solutions.lc
-even [] ;;
-:reload test/solutions.lc
-:reload test/solutions.lc
-length [1,2,3];;
-length [];;
-:reload test/solutions.lc
-length [];;
-fib 6 ;;
-fib 6
-empty [1,2,3] ;;
-empty [] ;;
-:load test/solutions.lc
-:quit
-:help
-::exit
-:exit
-lengthRec [1,2,3] ;;
-length [1,2,3] ;;
-length [1,2,3]
-:load test/linked-list.lc
-:load linked-list.lc
-length [];;
-length [];
-:reload test/part1.lc
-diffName [] ;;
-:reload test/part1.lc
-lenRec [] ;;
-:reload test/part1.lc
-length [] ;;
-:reload test/part1.lc
-length [] ;;
-:reload test/part1.lc
-:reload test/part1.lc
-:reload test/part1.lc
-length [1,2,3] ;;
-:reload test/part1.lc
-length [1,2,3] ;;
-:reload test/part1.lc
-len [1,2,3] ;;
-:reload test/part1.lc
-len [1,2,3] ;;
-:reload test/part1.lc
-len [1,2,3] ;;
-:reload test/part1.lc
-len [1,2,3] ;;
-:reload test/part1.lc
-len [1,2,3] ;;
-:reload test/part1.lc
-len [1,2,3] ;;
-:reload test/part1.lc
-length [1,2,3] ;;
-:reload test/part1.lc
-length [1,2,3] ;;
-length [1,2,3]
-:reload test/part1.lc
-:reload test/part1.lc
-fib 6 ;;
-fib 7 ;;
-fib 3 ;;
-fib 3
-:reload test/part1.lc
-:reload test/part1.lc
-fib 3 ;;
