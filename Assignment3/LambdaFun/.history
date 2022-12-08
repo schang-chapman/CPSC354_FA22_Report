@@ -1,4 +1,38 @@
 :quit
+even [1,2,3];;
+even [];;
+:reload test/solutions.lc
+:reload test/solutions.lc
+even [1,2,3];;
+even [];;
+:load test/solutions.lc
+:quit
+even [1,2,3];;
+:reload test/solutions.lc
+even [1,2,3];;
+:reload test/solutions.lc
+even [1,2,3];;
+even [];;
+:reload test/solutions.lc
+:reload test/solutions.lc
+even [];;
+:load test/solutions.lc
+:quit
+even [] ;;
+:reload test/solutions.lc
+even [] ;;
+:reload test/solutions.lc
+:reload test/solutions.lc
+length [1,2,3];;
+length [];;
+:reload test/solutions.lc
+length [];;
+fib 6 ;;
+fib 6
+empty [1,2,3] ;;
+empty [] ;;
+:load test/solutions.lc
+:quit
 :help
 ::exit
 :exit
@@ -64,16 +98,3 @@ member 1 [1,2,3] ;;
 member 1 [] ;;
 plusone 3 ;;
 plusone 3
-:load test/examples.lc
-empty [] ;;
-:reload test/part1.lc
-empty [] ;;
-:reload test/part1.lc
-empty [] ;;
-empty [] ;
-:reload test/part1.lc
-empty [] ;;
-empty [] ;;
-empty []
-:load test/part1.lc
-:load test/part1.lc
