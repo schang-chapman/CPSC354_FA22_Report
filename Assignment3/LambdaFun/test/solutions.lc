@@ -25,3 +25,9 @@ rec even = \x.
             (b:bs) -> even bs
         }
     };;
+
+rec append = \x. \y.
+    case x of {
+        [] -> [y],
+        (a:as) -> a:(append as y)
+    };;
