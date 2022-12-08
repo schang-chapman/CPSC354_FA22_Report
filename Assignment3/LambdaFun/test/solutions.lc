@@ -10,3 +10,9 @@ rec fib = \x.
         1 -> 1 ,
         _ -> fib (x-1) + fib (x-2) 
     } ;;
+
+rec length = \x.
+    case x of {
+        [] -> 0 ,
+        (a:as) -> (length as)+1
+    } ;;

@@ -1,0 +1,79 @@
+:quit
+:help
+::exit
+:exit
+lengthRec [1,2,3] ;;
+length [1,2,3] ;;
+length [1,2,3]
+:load test/linked-list.lc
+:load linked-list.lc
+length [];;
+length [];
+:reload test/part1.lc
+diffName [] ;;
+:reload test/part1.lc
+lenRec [] ;;
+:reload test/part1.lc
+length [] ;;
+:reload test/part1.lc
+length [] ;;
+:reload test/part1.lc
+:reload test/part1.lc
+:reload test/part1.lc
+length [1,2,3] ;;
+:reload test/part1.lc
+length [1,2,3] ;;
+:reload test/part1.lc
+len [1,2,3] ;;
+:reload test/part1.lc
+len [1,2,3] ;;
+:reload test/part1.lc
+len [1,2,3] ;;
+:reload test/part1.lc
+len [1,2,3] ;;
+:reload test/part1.lc
+len [1,2,3] ;;
+:reload test/part1.lc
+len [1,2,3] ;;
+:reload test/part1.lc
+length [1,2,3] ;;
+:reload test/part1.lc
+length [1,2,3] ;;
+length [1,2,3]
+:reload test/part1.lc
+:reload test/part1.lc
+fib 6 ;;
+fib 7 ;;
+fib 3 ;;
+fib 3
+:reload test/part1.lc
+:reload test/part1.lc
+fib 3 ;;
+fib 3
+empty [1,2,3];;
+empty [];;
+:reload test/part1.lc
+empty [];;
+empty [1,2,3];;
+:reload test/part1.lc
+empty [1,2,3];;
+empty [1,2,3];;
+:load test/part1.lc
+:load test:part1.lc
+member 1 [1,2,3] ;;
+member 1 [] ;;
+plusone 3 ;;
+plusone 3
+:load test/examples.lc
+empty [] ;;
+:reload test/part1.lc
+empty [] ;;
+:reload test/part1.lc
+empty [] ;;
+empty [] ;
+:reload test/part1.lc
+empty [] ;;
+empty [] ;;
+empty []
+:load test/part1.lc
+:load test/part1.lc
