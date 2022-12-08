@@ -1,4 +1,9 @@
 :quit
+:exit
+reverse [0,1,2,3,4] ;;
+reverse [0,1,2,3,4]
+:load test/solutions.lc
+:quit
 append [0,1,2] 3 ;;
 append [0,1,2] 3
 :load test/solutions.lc
@@ -93,8 +98,3 @@ fib 3
 :reload test/part1.lc
 :reload test/part1.lc
 fib 3 ;;
-fib 3
-empty [1,2,3];;
-empty [];;
-:reload test/part1.lc
-empty [];;

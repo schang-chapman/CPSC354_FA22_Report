@@ -31,3 +31,9 @@ rec append = \x. \y.
         [] -> [y],
         (a:as) -> a:(append as y)
     };;
+
+rec reverse = \x.
+    case x of {
+        [] -> x,
+        (a:as) -> append (reverse as) a
+    };;
