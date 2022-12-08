@@ -1,0 +1,5 @@
+val empty = \x.
+    case x of {
+        [] -> true ,
+        (a:as) -> false
+    } ;;

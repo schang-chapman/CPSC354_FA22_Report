@@ -1,7 +1,0 @@
-:quit
-:exit
-::exit
-:env
-:help
-:tree
-:load test/examples.lc
