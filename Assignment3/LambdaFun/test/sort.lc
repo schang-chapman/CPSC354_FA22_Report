@@ -1,0 +1,6 @@
+val insert = \n. \l. \r.
+    let val between = new [] in
+    between := [n, r];
+    case (!l) of {
+        (!between) -> l
+    };;

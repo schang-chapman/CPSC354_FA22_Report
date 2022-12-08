@@ -1,4 +1,19 @@
 :quit
+print (insert 1 nil);;
+:load test/sort.lc
+:quit
+print (insert 1 nil);;
+:env
+insert 1 nil;;
+:load test/sort.lc
+:quit
+insert 1 nil;;
+print (insert 1 nil);;
+:load test/sort.lc
+:load test/sort.lc
+:load test/sort.lc
+:load test/sort.lc
+:quit
 weave [1,2,3] [4,5,6];;
 append [1,2,3] [4,5,6];;
 reverse [0,1,2,3] ;;
@@ -83,18 +98,3 @@ reverse [0,1,2,3,4]
 :load test/solutions.lc
 :quit
 append [0,1,2] 3 ;;
-append [0,1,2] 3
-:load test/solutions.lc
-:quit
-even [1,2,3,4];;
-even [1,2,3];;
-even [];;
-:load test/solutions.lc
-:load test/solutions.lc
-:quit
-even [1,2,3];;
-even [];;
-:reload test/solutions.lc
-:reload test/solutions.lc
-even [1,2,3];;
-even [];;
