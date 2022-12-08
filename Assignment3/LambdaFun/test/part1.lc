@@ -1,5 +1,12 @@
 val empty = \x.
     case x of {
-        [] -> true ,
-        (a:as) -> false
+        [] -> 1 ,
+        (a:as) -> 0
+    } ;;
+
+rec fib = \x.
+    case x of {
+        0 -> 0 ,
+        1 -> 1 ,
+        _ -> fib (x-1) + fib (x-2) 
     } ;;
