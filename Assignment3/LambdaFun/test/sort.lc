@@ -1,6 +1,62 @@
-val insert = \n. \l. \r.
+val nil = 
+    let val a = new [] in 
+    a := "NULL";
+    a ;;
+
+val cons = \e. \a. 
+    let val b = new [] in
+    b := [e,a];
+    b ;;
+
+val hd = \a.
+    case !a of {
+        "NULL"-> "tried to take the head of an empty list",
+        [e,a'] -> e 
+    } ;;
+
+val tl = \a.
+    case !a of {
+        "NULL" -> "tried to take the tail of an empty list",
+        [e,a'] -> a'
+    } ;;
+
+val inBetween =  \n. \l. \r.
     let val between = new [] in
     between := [n, r];
-    case (!l) of {
-        (!between) -> l
-    };;
+    l := [hd l, between];
+    l;;
+
+val insert = \n. \l.
+    let val return = new [] in
+    let val ptr = new [] in
+    let val ptrPrev = new [] in
+    let val insertHere = new [] in
+    return := !(cons nil l);
+    ptr := l;
+    ptrPrev := return;
+    insertHere := false;
+
+    while !insertHere == false do
+        case (!(!ptr) != "NULL") of {
+            true -> case ((hd (!ptr)) < n) of {
+                true -> ptrPrev := !ptr;
+                    ptr := tl !ptr,
+                false -> insertHere := true
+            },
+            false -> insertHere := true
+        };
+    ptr := inBetween n !ptrPrev !ptr;
+    tl return;;
+
+val sort = \l. 
+    let val ptr = new [] in
+    let val newList = new [] in
+    ptr := l;
+    newList := nil;
+
+    while !(!ptr) != "NULL" do
+        case !(!ptr) of {
+            [e,l'] -> newList := insert e !newList;
+                ptr := l'
+        };
+    !newList;;
