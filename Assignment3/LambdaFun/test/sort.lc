@@ -37,13 +37,13 @@ val insert = \n. \l.
     insertHere := false;
 
     while !insertHere == false do
-        case (!(!ptr) != "NULL") of {
-            true -> case ((hd (!ptr)) < n) of {
-                true -> ptrPrev := !ptr;
-                    ptr := tl !ptr,
-                false -> insertHere := true
+        case !(!ptr) of {
+            [e, l'] -> case (e > n) of {
+                true -> insertHere := true,
+                false -> ptrPrev := !ptr;
+                    ptr := l'
             },
-            false -> insertHere := true
+            "NULL" -> insertHere := true
         };
     ptr := inBetween n !ptrPrev !ptr;
     tl return;;
