@@ -4,7 +4,7 @@
 ### Submission Date: Dec. 11 2022
 
 # Pseudocode
-My pseudocode logic was written in Python. These Python examples use normal lists on account of me deciding that I would be able to retrospectively replace the necessary loops in order to iterate through pointers as demonstrated in the example length function provided in linked-list.lc.
+My pseudocode logic was written in Python. These Python examples use normal lists on account of me deciding that I would be able to retrospectively replace the necessary loops in order to iterate through pointers by referencing the example length function provided in linked-list.lc.
 ```
 def inBetween(val, left, right):
     right.insert(0, val)
