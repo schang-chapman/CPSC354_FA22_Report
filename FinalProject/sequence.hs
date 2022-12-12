@@ -35,26 +35,28 @@ fib l = map fib [0..l-1]
         fib n = fib (n-1) + fib (n-2)
 
 --------------------------------------
--- List Arithmetic (Milestone 2: 12/4)
+-- List Extension (Milestone 2 + 3: 12/11)
 --------------------------------------
 
--- Addition
--- TODO
-
--- Subtraction
--- TODO
-
--- Multiplication
--- TODO
-
--- (Integer) Division
--- TODO
+-- Extension
+extension :: [Integer] -> [Integer] -> ([Integer], [Integer])
+extension as bs | length as < length bs = extension (as ++ [0]) bs
+                | length as > length bs = extension as (bs ++ [0])
+                | otherwise = (as, bs)
 
 --------------------------------------
--- List Extension (Milestone 3: 12/11)
+-- List Arithmetic (Milestone 2 + 3: 12/11)
 --------------------------------------
 
--- TODO
+listArith :: [Integer] -> [Integer] -> Integer -> [Integer]
+listArith [] [] x= []
+listArith (a:as) (b:bs) x | length (a:as) == length (b:bs) = if x == 0 then (a+b) : listArith as bs x
+                                                             else if x == 1 then (a-b) : listArith as bs x
+                                                             else if x == 2 then (a*b) : listArith as bs x
+                                                             else if x == 3 then if b == 0 then 0 : listArith as bs x
+                                                                                 else (div a b) : listArith as bs x
+                                                             else error "Invalid list arithmetic operation"
+                          | otherwise = listArith (fst (extension (a:as) (b:bs))) (snd (extension (a:as) (b:bs))) x
 
 -------------
 -- Test Cases
@@ -68,11 +70,17 @@ main = do
   print $ cube 5
   print $ fib 5
 
-  -- List Arithmetic Tests --
-  -- Addition
-  -- Subtraction
-  -- Multiplication
-  -- Division
-
   -- Extension --
-  -- TODO
+  print $ extension [1,2,3] [4,5,6]
+  print $ extension [1,2,3] [4,5,6,7,8,9]
+  print $ extension [1,2,3,4,5,6] [7,8,9]
+
+  -- List Arithmetic Tests --
+  print $ listArith [1,2,3] [4,5,6,7] 0
+  print $ listArith (tri 7) (arith 2 1 5) 0
+  print $ listArith [1,2,3] [4,5,6,7] 1
+  print $ listArith (tri 7) (arith 2 1 5) 1
+  print $ listArith [1,2,3] [4,5,6,7] 2
+  print $ listArith (tri 7) (arith 2 1 5) 2
+  print $ listArith [1,2,3] [4,5,6,7] 3
+  print $ listArith (tri 7) (arith 2 1 5) 3
