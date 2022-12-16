@@ -52,6 +52,7 @@
 \usepackage{graphicx}
 \graphicspath{ {./Images/} }
 
+\usepackage{hyperref}
 
 \title{CPSC-354 Report}
 \author{Sharon Chang  \\ Chapman University}
@@ -305,8 +306,10 @@ The following demonstrates the syntax trees for various arithmetic expressions. 
 
 There is a folder called "hw5" in the repository that this folder is contained in. Using the grammar and interpreter contained within, I generated linearized abstract syntax trees for various Lambda expressions, then made 2D trees of them as seem below.
 
+\begin{center}
 \includegraphics[width=\linewidth]{hw5p1}
 \includegraphics[width=\linewidth]{hw5p2}
+\end{center}
 
 \medskip\noindent
 Additionally, the following includes examples of various lambda expressions evaluated by hand.
@@ -465,67 +468,130 @@ z
 %
 The following demonstrates the various properties of abstract reduction sequences.
 
+\begin{center}
 \includegraphics[width=\linewidth]{hw7a}
-
-\medskip\noindent
+\end{center}
+%
 Here are examples fulfilling every combination of ARS properties, where possible.
 
+\begin{center}
 \includegraphics[width=\linewidth]{hw7b}
-
+\end{center}
 
 \subsection{Week 8}
-This ARS does not terminate because the rules ba -> ab and ab -> ba will loop with each other infinitely.
+The following section is an analysis on the ARS system seen below.
+
+\begin{lstlisting}
+aa -> a
+bb -> b
+ba -> ab
+ab -> ba
+\end{lstlisting}
+%
+This ARS does not terminate on account of the last two rules. These rules can infinitely loop into each other, forming the following computation.
+
+\begin{lstlisting}
+ba -> ab -> ba -> ...
+\end{lstlisting}
+%
+This ARS has 3 normal forms where the computation can no longer be reduced. These forms are a, b, and [] (empty list).
 
 \medskip\noindent
-The normal forms of this ARS are a and b because those two cannot be reduced any further than their current form.
+In order to modify the ARS to make it terminate, I need to introduce a fourth normal form. By editing the ARS to the form below, the ARS now terminates and has the unique normal forms a, b, [], and ab.
 
-\medskip\noindent
-No, because adding unique normal forms would break the looping equivalency relations caused by the rules ba -> ab and ab -> ba.
+\begin{lstlisting}
+aa -> a
+bb -> b
+ba -> ab
+ab -> ab
+\end{lstlisting}
+%
+This modified ARS now terminates and breaks the loop created by the original ruleset. This maintains the equivalency relationship from the original rules as well, as seen below.
 
-\medskip\noindent
-The existint normal forms of a and b reduce duplicates into into singular forms. The ARS as a whole is a reversing function that will reverse a given string while reducing its duplicates.
+\begin{lstlisting}
+Original:
+ba -> ab -> ...
+ab -> ba -> ab -> ...
+
+Modified:
+ba -> ab -> ab
+\end{lstlisting}
+%
+Looking at the 4 normal forms a, b, [], and ab, I can find specification being implemented by the ARS. The normal form a has the invariant that there is at least one a in the input. The normal form b has the same invariant, but for there being at least one b. The empty string results from there being no a or b. Then, there is the normal form ab, which results from the combination of either ba or ab. That is, the invariant that there is at least one a and b. These invariants communicate that this ruleset decides whether the input is empty, has "a"s but no "b"s, "b"s but no "a"s, or has both "a"s and "b"s.
 
 \subsection{Week 9}
-For my project, the two major parts will be the list generating functions and the list arithmetic functions. I will give myself the deadline of November 13th to complete the 4 list generating functions (triangle, cube, square, and fibonacci). Then, I will give myself the deadline of December 4th to complete the list artihmetic functions, but at this point they will only work with lists of the same length. I suspect that my method of augmenting lists in order to perform arithmetic between lists of different lengths will need time. Therefore, I will give myself until December 11th to figure out how to make lists of different lengths compatible in my arithmetic functions. This will give me all of finals week to do any finishing touches and complete the report details.
+For my final project, the two major parts will be the list generating functions and the list arithmetic functions. My milestones will be as follows:
 
 \medskip\noindent
-The ruleset is nonterminating because the first half of the rules can be used to form an infinite loop. It is non-confluent because diverging paths taken will not meet back up, there is no way to form compatible peaks and valleys. It does not have unique normal forms because while everything does have reducible forms, there are multiple ways to reduce to b or an empty list, making them non-unique.
+November 13th: Complete the 4 list generating functions (triangle, cube, square, and fibonacci)
 
 \medskip\noindent
-The invariants are:
+December 4th: Complete the list artihmetic functions, but at this point they will only work with lists of the same length
 
 \medskip\noindent
-length
+December 11th: Figure out how to make lists of different lengths compatible in my arithmetic functions.
+
+\medskip\noindent This schedule will give me all of finals week to do any final edits that need to be made and complete the report details.
 
 \medskip\noindent
-number of a's
+I will now analyze the following ARS.
+
+\begin{lstlisting}
+ba -> ab
+ab -> ba
+ac -> ca
+ca -> ac
+bc -> cb
+cb -> bc
+
+aa -> b
+ab -> c
+ac ->  
+bb ->
+cb -> a
+cc -> b
+\end{lstlisting}
+%
+By drawing the rules out, the properties of the ARS become apparent.
+
+\begin{center}
+\includegraphics{hw9}
+\end{center}
+%
+This ARS is non-terminating because the loops formed by ab, ba, ac, ca, bc, and cb can run forever. It is also non-confluent as there are no visible peaks or valleys formed by connecting the rules together. The ARS also does not have unique normal forms. The normal forms here are c, [] (empty), a, and b, but the normal forms [] and b are both shared between multiple rules.
 
 \medskip\noindent
-number of b's
+The invariants of this ARS are:
 
-\medskip\noindent
-number of c's
-
-\medskip\noindent
-number of a's = number of b's = number of c's
-
-\medskip\noindent
-number of a's + number of c's = number of b's
-
-\medskip\noindent
-I feel like there's more after this but I'm stumped.
+\begin{itemize}
+\item {Any pair of letters with the letter b and a different letter will evaluate into the missing third letter}
+\item {Any pair of two of the same letter that is not the letter b will evalate into the letter b}
+\item {Any exceptions to the above two rules will evaluate into empty}
+\end{itemize}
 
 \subsection{Week 10}
-Placeholder
+The following code demonstrates the computation steps for the factorial function $fix_F$2.
+\begin{lstlisting}
+fix F 2 = (def of fix)
+F (fix F) 2 = (def of F)
+???
+2
+\end{lstlisting}
 
 \subsection{Week 11}
-The following short essay discusses this paper:
+The following short essay discusses \href{https://www.cs.tufts.edu/~nr/cs257/archive/simon-peyton-jones/contracts.pdf}{this paper} on a prototype for a programming language based on writing and implementing contracts.
 
 \medskip\noindent
-https://www.cs.tufts.edu/~nr/cs257/archive/simon-peyton-jones/contracts.pdf
+A tailor-made language for writing and executing contracts would open the door to creating specialized contract creation tools. Similar to specialized languages, such as SQL being a database language, it helps to have a specialized tool one can use that is built to handle a specific purpose. Even if it is not perfect, it could still be used to handle common, simple contracts. Having a preexisting groundwork also helps to build more complicated projects on top of it later on. Additionally, because current contracts are lengthy pieces of writing, to make a program that could successfully replace that could perhaps be a step towards better natural language processing.
 
 \medskip\noindent
-Placeholder
+However, while I feel that a specialized contract language could be useful, computers would likely be severely limited in the types of contracts they can interpret. Contracts that rely on hard concepts such as "payment of X amount by Y date" could be easily run through a computer. However, when accounting for human error, computer-run contract systems must be extremely complex to keep up. Payment contracts, such as rent, are not often subject to late or partial payments. A human administrator would be able to provide the necessary leeway for such circumstances, but a computer is unlikely to care. One could use a program to retroactively inform the computer that an unwritten change was made to the contract, but with how common such scenarios are, this might be introducing unnecessary complexity to the situation.
+
+\medskip\noindent
+Similarly, contracts that rely on abstract concepts, such as NDAs, would be difficult to administer via a computer program. A computer would be unable to understand the concept of information leaking and would be unreliable in enforcing an NDA as a contract. In the same vein, many contracts rely on multiple conditions that can overlap and affect other conditions, ultimately affecting the outcome. Lawyers are specially trained to learn how to parse contracts, which are often beyond the scope of understanding for normal people. Contracts of such complexity, which are already a challenge for human understanding, would pose a great obstacle for a computer to parse via a programming language. One would have to conduct an order of operations for conditions that are flexible enough to work with a wide range of contracts.
+
+\medskip\noindent
+However, because of this complexity issue, should this project succeed, it would open the possibility for contract parsing to become more open to the general public. Not everyone is a lawyer, and not everyone has one on hand. Given the prolific nature of contracts in the online world, from agreeing to be subject to tracking cookies or signing up for a new website, having a computer program that could parse any given contract and reduce it to understandable terms would be very useful. Making the language of contracts more accessible could also change how lawyers and contract writers approach writing contracts, as the parser would make it impossible for them to obfuscate their intentions through complicated language. This development could force transparency upon these institutions and, in turn, generate more fair contracts for the general population.
 
 \subsection{Week 12}
 The following section demonstrates Hoare logic analysis as applied to the code below.
@@ -560,19 +626,33 @@ However, this only accounts for certain values of x and z. Taking the prior exam
 \begin{align*}
 \{x = a \: \Lambda \: y = b \: \Lambda \: z = c\} \; {\rm while} \: (x!=0) \: {\rm do} \: z:=z*y; \: x:= x-1 \: {\rm done} \; \{z = c * b^a\}
 \end{align*}
+%
+The following lines demonstrate the proof tree demonstrates the above steps in Hoare logic:
+\begin{align*}
+\{z*y = c * y^{(a - (x-1))} \: \Lambda \: y = b\} \; z:= z*y \; \{z = c * y^{(a - (x-1))} \: \Lambda \: y = b\} \; x:=x-1 \; \{z =c * y^{(a - x)} \: \Lambda \: y = b\}
+\end{align*}
+\begin{align*}
+\{z = c * y^{(a - (x))} \: \Lambda \: y = b \: \Lambda \: x \neq 0\} \; z:= z*y; \: x:=x-1 \;  \{z =c * y^{(a - x)} \: \Lambda \: y = b\}
+\end{align*}
+\begin{align*}
+ \{z =c * y^{(a - x)} \: \Lambda \: y = b\} \; {\rm while} \: (x!=0) \: {\rm do} \: z:=z*y; \: x:= x-1 \: {\rm done} \; \{x=0 \: \Lambda \: z =c * y^{(a - x)} \: \Lambda \: y = b\}
+\end{align*}
+\begin{align*}
+\{x = a \: \Lambda \: y = b \: \Lambda \: z = c\} \; {\rm while} \: (x!=0) \: {\rm do} \: z:=z*y; \: x:= x-1 \: {\rm done} \; \{z = c * b^a\}
+\end{align*}
 
 \section{Project}
 
-Placeholder
+The final project I have created goes into the variety of methods with which Haskell allows the user to create and manipulate infinite lists. My project is centered around mathematical patterns, with functions that generate various patterns as lists and other functions that can then manipulate them.
 
 \subsection{Specification}
-I want to make a program involving infinite lists in Haskell in order to generate lists of variable size and manipulate them. There are a variety of sequences in math similar to the Fibonacci sequence, and I will implement them as separate functions. The sequences being implemented will be arithmetic, geometric, triangular, square, cube, and Fibonacci.
+My project uses infinite lists in Haskell in order to generate lists of variable size and manipulate them. There are a variety of sequences in math similar to the Fibonacci sequence, and I will implement them as separate functions. The sequences being implemented will be arithmetic, geometric, triangular, square, cube, and Fibonacci.
 
 \medskip\noindent
-Triangle, cube, square, and Fibonacci will work by taking in 1 integer number and generating a list of the sequence with the length of the given integer. For example, (fib 5) would generate a list containing the first 5 Fibonacci numbers. Arithmetic and geometric will take in 3 integer numbers. The first integer works the same as the other sequences, where it dictates the list's length. The 2nd number will be the first entry of the list and the 3rd number will be the number added to each entry. For example, (arit 3 1 6) will produce the list [1, 7, 13]. In geometric, the 2nd number works the same but 3rd number will be the number multiplied against the given value to continue the list. For example, (geo 3 1 6) will produce the list [1, 6, 36].
+Triangle, cube, square, and Fibonacci work by taking in 1 integer number and generating a list of the sequence with the length of the given integer. For example, (fib 5) generates a list containing the first 5 Fibonacci numbers. Arithmetic and geometric take in 3 integer numbers. The first integer works the same as the other sequences, where it dictates the list's length. The 2nd number is the first entry of the list and the 3rd number is the number added to each entry. For example, (arit 3 1 6) produce the list [1, 7, 13]. In geometric, the 2nd number works the same but the 3rd number is the number multiplied against the given value to continue the list. For example, (geo 3 1 6) produces the list [1, 6, 36].
 
 \medskip\noindent
-These lists can have mathematical operations performed between them, which will result in a new list. The available operations will be addition, subtraction, multiplication, and integer division. When performing mathematical operations between lists of different lengths, the resulting list will be the length of the longer list. The shorter list will be extended with 0 values to fill it out to match the length of the longer list. For example, adding the lists [2, 4, 8, 16] and the list [1, 2, 3] will be the same as adding the lists [2, 4, 8, 16] and [1, 2, 3, 0], resulting in the list [3, 6, 11, 16].
+These lists can have mathematical operations performed between them, which will result in a new list. The available operations are addition, subtraction, multiplication, and integer division. When performing mathematical operations between lists of different lengths, the resulting list will be the length of the longer list. The shorter list will be extended with 0 values to fill it out to match the length of the longer list. For example, adding the lists [2, 4, 8, 16] and the list [1, 2, 3] is the same as adding the lists [2, 4, 8, 16] and [1, 2, 3, 0], resulting in the list [3, 6, 11, 16].
 
 \subsection{Prototype}
 
