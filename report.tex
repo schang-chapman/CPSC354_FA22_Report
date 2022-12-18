@@ -468,15 +468,72 @@ z
 %
 The following demonstrates the various properties of abstract reduction sequences.
 
-\begin{center}
-\includegraphics[width=\linewidth]{hw7a}
-\end{center}
+\begin{enumerate}
+\item {A = \{\}
+
+Terminating, confluent, has unique normal forms
+
+No elements given for R, therefore this is a tree consisting of empty elements that automatically satisfy all conditions.}
+\item {A = \{a\} \& R = \{\}
+
+Terminating, confluent, has unique normal forms
+
+R is empty, therefore this is a tree consisting of empty elements that automatically satisfy all contitions.}
+\item {A = \{a\} \& R = \{(a, a)\}
+
+Non-terminating, confluent, no unique normal forms
+
+\includegraphics{hw7a3}}
+\item {A = \{a, b, c\} \& R = \{(a, b), (a, c)\}
+
+Terminating, non-confluent, no unique normal forms
+
+\includegraphics{hw7a4}}
+\item {A = \{a, b, c\} \& R = \{(a, b), (a, c)\}
+
+Terminating, non-confluent, no unique normal forms
+
+\includegraphics{hw7a5}}
+\item {A = \{a, b, c\} \& R = \{(a, b), (b, b), (a, c)\}
+
+Non-terminating, non-confluent, no unique normal forms
+
+\includegraphics{hw7a6}}
+\item {A = \{a, b, c\} \& R = \{(a, b), (b, b), (a, c), (c, c)\}
+
+Non-terminating, non-confluent, no unique normal forms
+
+\includegraphics{hw7a7}}
+\end{enumerate}
 %
 Here are examples fulfilling every combination of ARS properties, where possible.
 
-\begin{center}
-\includegraphics[width=\linewidth]{hw7b}
-\end{center}
+\begin{enumerate}
+\item {Confluent, terminating, has unique normal forms
+
+\includegraphics{hw7b1}}
+\item {Confluent, terminating, no unique normal forms
+
+Does not exist. A confluent and terminating ARS must reach a point of reduction on account of the termination needing an endpoint and the confluence inevitably reducing an element. Therefore, such a tree must always have unique normal forms.}
+\item {Confluent, non-terminating, has unique normal forms
+
+\includegraphics{hw7b3}}
+\item {Confluent, non-terminating, no unique normal forms
+
+\includegraphics{hw7b4}}
+\item {Non-confluent, terminating, has unique normal forms
+
+Does not exist. A terminating ARS with unique normal forms must have a point of divergence for the unique forms, but must come together to a point of termination in order to be terminating. Therefore, such an ARS must always be confluent.}
+\item {Non-confluent, terminating, no unique normal forms
+
+\includegraphics{hw7b6}}
+\item {Non-confluent, non-terminating, has unique normal forms
+
+Does not exist. An ARS that is non-confluent and non-terminating cannot maintain all elements in a reduced state, and must inevitably have some elements with share normal forms. This means that such an ARS cannot have unique normal forms.}
+\item {Non-confluent, non-terminating, no unique normal forms
+
+\includegraphics{hw7b8}}
+\end{enumerate}
 
 \subsection{Week 8}
 The following section is an analysis on the ARS system seen below.
