@@ -28,54 +28,65 @@ arith l s n = [s, s+n..s+n*(l-1)]
 -- fib :: Integer -> [Integer]
 -- fib l = TODO
 
------------------
--- List Extension
------------------
+---------------------
+-- List Manipulations
+---------------------
+
+-- Filter
+-- listFilter :: [Integer] -> [Integer] -> [Integer]
+-- listFilter as bs = TODO
+
+-- Match
+-- listMatch :: [Integer] -> [Integer] -> [Integer]
+-- listMatch as bs = TODO
+
+-- Sort
+-- listSort :: [Integer] -> [Integer] -> String -> [Integer]
+-- listSort as bs x = TODO
 
 -- Extension
 -- extension :: [Integer] -> [Integer] -> ([Integer], [Integer])
 -- extension as bs = TODO
 
-------------------
--- List Arithmetic
-------------------
-
+-- Arithmetic
 -- listArith :: [Integer] -> [Integer] -> Integer -> [Integer]
 -- listArith as bs x = TODO
-
---------------------
--- List Manipulation
---------------------
-
--- listManip :: [Integer] -> [Integer] -> Integer -> [Integer]
--- listManip as bs x = TODO
 
 -------------
 -- Test Cases
 -------------
 main = do
   -- Function Tests --
-  -- print $ arith 3 1 6
-  -- print $ geo 3 1 6
-  -- print $ tri 4
+  --------------------
+  -- print $ arith 5 1 3
+  -- print $ arith 5 4 4
+
+  -- print $ geo 5 1 3
+  -- print $ geo 5 4 4
+
+  -- print $ tri 5
+  
   -- print $ sqr 5
+
   -- print $ cube 5
+
   -- print $ fib 5
 
-  -- Extension --
-  -- print $ extension [1,2,3] [4,5,6]
-  -- print $ extension [1,2,3] [4,5,6,7,8,9]
-  -- print $ extension [1,2,3,4,5,6] [7,8,9]
-
-  -- List Arithmetic Tests --
-  -- print $ listArith [1,2,3] [4,5,6,7] 0
-  -- print $ listArith (tri 7) (arith 2 1 5) 0
-  -- print $ listArith [1,2,3] [4,5,6,7] 1
-  -- print $ listArith (tri 7) (arith 2 1 5) 1
-  -- print $ listArith [1,2,3] [4,5,6,7] 2
-  -- print $ listArith (tri 7) (arith 2 1 5) 2
-  -- print $ listArith [1,2,3] [4,5,6,7] 3
-  -- print $ listArith (tri 7) (arith 2 1 5) 3
 
   -- List Manipulation Tests --
-  -- TODO
+  -----------------------------
+  -- print $ listFilter [1,2,3,4,5,6] [1,3,5]
+
+  -- print $ listMatch [1,2,3,4,5,6] [1,3,5]
+
+  -- print $ listSort [3,0,9,2,5,8] [6,5,1,7,4,2] "asc"
+  -- print $ listSort [3,0,9,2,5,8] [6,5,1,7,4,2] "desc"
+
+  -- print $ listExt [1,2,3] [4,5,6]
+  -- print $ listExt [1,2,3] [4,5,6,7,8,9]
+  -- print $ listExt [1,2,3,4,5,6] [7,8,9]
+
+  -- print $ listArith [1,2,3] [4,5,6,7] 0
+  -- print $ listArith [1,2,3] [4,5,6,7] 1
+  -- print $ listArith [1,2,3] [4,5,6,7] 2
+  -- print $ listArith [1,2,3] [4,5,6,7] 3

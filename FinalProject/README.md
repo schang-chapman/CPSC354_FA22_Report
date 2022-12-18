@@ -3,7 +3,7 @@
 ### Sharon Chang
 ### Submission Date: Dec. 18 2022
 
-Each Haskell file in this folder contains the same set of 8 functions. The difference is that each file uses a different approach to infinite lists in order to accomplish the same results. The following instructions list each of the functions and the necessary inputs to use them. The functions have the same names and inputs across each Haskell file.
+Each Haskell file in this folder contains the same set of 11 functions. The difference is that each file uses a different approach to infinite lists in order to accomplish the same results. The following instructions list each of the functions and the necessary inputs to use them. The functions have the same names and inputs across each Haskell file.
 
 # Mathematical Functions
 ### Arithmetic: ```arith :: Integer -> Integer -> Integer -> [Integer]```
@@ -40,7 +40,31 @@ Input: Length of resulting list <br />
 Output: Fibonacci number sequence
 
 # List Functions
-### List Extension: ```extension :: [Integer] -> [Integer] -> ([Integer], [Integer])```
+
+### List Filter: ```listFilter :: [Integer] -> [Integer] -> [Integer]```
+Inputs:
+  1. List of integers to be output
+  2. List of integers to be removed from output list
+
+Output: List of all elements unique to the first list 
+
+### List Match: ```listMatch :: [Integer] -> [Integer] -> [Integer]```
+Inputs:
+  1. List of integers
+  2. List of integers
+
+Output: List of all elements present in both lists
+
+### List Sort: ```listSort :: [Integer] -> [Integer] -> String -> [Integer]```
+Inputs:
+  1. List of integers
+  2. List of integers
+  3. String dictating whether the resulting list is sorted in ascending or descending order
+
+Output: List of all elements in both lists sorted by numerical order <br />
+(Removes duplicates.)
+
+### List Extension: ```listExt :: [Integer] -> [Integer] -> ([Integer], [Integer])```
 Inputs:
   1. List of integers
   2. List of integers
@@ -53,21 +77,10 @@ Inputs:
   1. List of integers
   2. List of integers
   3. Integer indicating desired list arithmetic function as follows: <br />
-    1. Addition: Adds each element from the two lists to each other. <br />
-    2. Subtraction: Subtracts the value of the second list from the value of the first list at each index. <br />
-    3. Multiplication: Multiplies each element from the two lists to each other. <br />
-    4. Division: Divides the value from the first list with the value of the second list at each index. <br />
+    1. Addition: Adds each element from the two lists to each other <br />
+    2. Subtraction: Subtracts the value of the second list from the value of the first list at each index <br />
+    3. Multiplication: Multiplies each element from the two lists to each other <br />
+    4. Division: Divides the value from the first list with the value of the second list at each index <br />
     (Will return 0 in instances of divide by 0.)
 
 Output: Result of arithmetic function as a single list
-
-### List Manipulation: ```listManip :: [Integer] -> [Integer] -> Integer -> [Integer]```
-Inputs:
-  1. List of integers
-  2. List of integers
-  3. Integer indicating desired list manipulation function as follows: <br />
-    1. Filter: Find all elements unique to the first list that are not present in the second. <br />
-    2. Match: Find all elements present in both lists. <br />
-    3. Sort: Merge all elements of both lists and sort them in ascending value.
-
-Output: Result of manipulation function as a single list
