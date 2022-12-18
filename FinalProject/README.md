@@ -3,22 +3,71 @@
 ### Sharon Chang
 ### Submission Date: Dec. 18 2022
 
-sequence.hs utilizes the nature of infinite lists in Haskell to generate various mathematical functions as lists and then perform arithmetic functions with them. This README provides use instructions and details for each function. Information on the mathematical patterns themselves as well as observations made during this project can be found in the report.
+Each Haskell file in this folder contains the same set of 8 functions. The difference is that each file uses a different approach to infinite lists in order to accomplish the same results. The following instructions list each of the functions and the necessary inputs to use them. The functions have the same names and inputs across each Haskell file.
 
-My first milestone was on 11/13 to complete all the mathematical functions. My second milestone was on 12/4 to complete the arithmetic list function. This milestone was postponed and merged with the date of the third milestone on account of illness. My third milestone was on 12/11 to complete the list extension function and make it compatible with all my other functions.
+# Mathematical Functions
+### Arithmetic: ```arith :: Integer -> Integer -> Integer -> [Integer]```
 
-# Mathematical Functions (Milestone 1: 11/13)
-* Arithmetic: Takes in 3 inputs. The first is the length of the list. The second is the starting number of the list. The third is the number that will be added to the previous number to create the next number.
-* Geometric: Takes in 3 inputs. The first is the length of the list. The second is the starting number of the list. The third is the number that will be multiplied against the previous number to create the next number.
-* Triangle: Takes in 1 input determining the length of the list. Will generate a list of triangular numbers.
-* Square: Takes in 1 input determining the length of the list. Will generate a list of squared numbers.
-* Cube: Takes in 1 input determining the length of the list. Will generate a list of cubed numbers.
-* Fibonacci: Takes in 1 input determining the length of the list. Will generate a list of Fibonacci numbers.
+Inputs:
+  1. Length of resulting list
+  2. Starting number of resulting list
+  3. Number that will be added to the previous number to create the next number in resulting list
 
-# List Functions (Milestone 2 + 3: 12/11)
-* List Extension: Takes in 2 lists as inputs. Recursively calls on itself to extend the shorter list until it matches the length of the longer list by adding 0s to it. When lists are of equal length, returns both lists in a tuple.
-* List Arithmetic: Takes in 3 inputs. The first two lists are extended via list extension if they are not the same length. When given two lists of the same length, this function performs one of 4 arithmetic functions with the lists. The third input is an integer that determines what function is performed with the lists. An error is thrown if the provided integer does not match any of the predetermined arithmetic functions.
-  * Addition: Recursively adds each element from the two lists to each other.
-  * Subtraction: Recursively subtracts the value of the second list from the value of the first list at each index.
-  * Multiplication: Recursively multiplies each element from the two lists to each other.
-  * Division: Recursively divides the value from the first list with the value of the second list at each index. This performs integer division with the div function. If the divisor value from the second list is 0, it will return a 0 for that index in order to avoid a divide by 0 error.
+Output: Arithmetic number sequence
+
+### Geometric: ```geo :: Integer -> Integer -> Integer -> [Integer]```
+Inputs:
+  1. Length of resulting list
+  2. Starting number of resulting list
+  3. Number that will be multiplied against the previous number to create the next number in resulting list
+
+Output: Geometric number sequence
+
+### Triangle: ```tri :: Integer -> [Integer]```
+Input: Length of resulting list <br />
+Output: Triangular number sequence
+
+### Square: ```sqr :: Integer -> [Integer]```
+Input: Length of resulting list <br />
+Output: Squared number sequence
+
+### Cube: ```cube :: Integer -> [Integer]```
+Input: Length of resulting list <br />
+Output: Cubed number sequence
+
+### Fibonacci: ```fib :: Integer -> [Integer]```
+Input: Length of resulting list <br />
+Output: Fibonacci number sequence
+
+# List Functions
+### List Extension: ```extension :: [Integer] -> [Integer] -> ([Integer], [Integer])```
+Inputs:
+  1. List of integers
+  2. List of integers
+
+Output: Tuple containing both input lists equalized to the same length <br />
+(The shorter list will have 0s added onto it until it matches the length of the longer list.)
+
+### List Arithmetic: ```listArith :: [Integer] -> [Integer] -> Integer -> [Integer]```
+Inputs:
+  1. List of integers
+  2. List of integers
+  3. Integer indicating desired list arithmetic function as follows: <br />
+    1. Addition: Adds each element from the two lists to each other. <br />
+    2. Subtraction: Subtracts the value of the second list from the value of the first list at each index. <br />
+    3. Multiplication: Multiplies each element from the two lists to each other. <br />
+    4. Division: Divides the value from the first list with the value of the second list at each index. <br />
+    (Will return 0 in instances of divide by 0.)
+
+Output: Result of arithmetic function as a single list
+
+### List Manipulation: ```listManip :: [Integer] -> [Integer] -> Integer -> [Integer]```
+Inputs:
+  1. List of integers
+  2. List of integers
+  3. Integer indicating desired list manipulation function as follows: <br />
+    1. Filter: Find all elements unique to the first list that are not present in the second. <br />
+    2. Match: Find all elements present in both lists. <br />
+    3. Sort: Merge all elements of both lists and sort them in ascending value.
+
+Output: Result of manipulation function as a single list
