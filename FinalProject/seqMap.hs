@@ -51,8 +51,8 @@ fib l = map fib [0..l-1]
 -- listSort as bs x = TODO
 
 -- Extension
--- extension :: [Integer] -> [Integer] -> ([Integer], [Integer])
--- extension as bs = TODO
+-- listExt :: [Integer] -> [Integer] -> ([Integer], [Integer])
+-- listExt as bs = TODO
 
 -- Arithmetic
 -- listArith :: [Integer] -> [Integer] -> Integer -> [Integer]
@@ -85,8 +85,10 @@ main = do
 
   {- print $ listMatch [1,2,3,4,5,6] [1,3,5] -}
 
-  {- print $ listSort [] [2,0,4,5,1,3] "asc"
+  {- print $ listSort [2,0,4,5,1,3] [] "asc"
   print $ listSort [2,0,4,5,1,3] [] "desc"
+  print $ listSort [] [2,0,4,5,1,3] "asc"
+  print $ listSort [] [2,0,4,5,1,3] "desc"
   print $ listSort [3,0,9,2,5,8] [6,5,1,7,4,2] "asc"
   print $ listSort [3,0,9,2,5,8] [6,5,1,7,4,2] "desc" -}
 

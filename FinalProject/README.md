@@ -61,7 +61,8 @@ Inputs:
   2. List of integers
   3. String dictating whether the resulting list is sorted in ascending or descending order
 
-Output: List of all elements in both lists sorted by numerical order
+Output: List of all elements in both lists sorted by numerical order <br />
+(Removes duplicates.)
 
 ### List Extension: ```listExt :: [Integer] -> [Integer] -> ([Integer], [Integer])```
 Inputs:

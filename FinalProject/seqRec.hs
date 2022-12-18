@@ -63,22 +63,16 @@ listMatch as (b:bs) = case (elem b as) of
 -- Sort
 listSort :: [Integer] -> [Integer] -> String -> [Integer]
 listSort [] [] x = []
-listSort [] bs x = case x of
-                    "asc" -> listSort [] (filter (/=minimum bs) bs) x ++ [minimum bs]
-                    "desc" -> listSort [] (filter (/=maximum bs) bs) x ++ [maximum bs]
-                    otherwise -> error "Invalid list sort operation"
 listSort as [] x = case x of
-                    "asc" -> listSort (filter (/=minimum as) as) [] x ++ [minimum as]
-                    "desc" -> listSort (filter (/=maximum as) as) [] x ++ [maximum as]
-                    otherwise -> error "Invalid list sort operation"
+                    "asc" -> [minimum as] ++ listSort (filter (/=minimum as) as) [] x
+                    "desc" -> [maximum as] ++ listSort (filter (/=maximum as) as) [] x
+                    
+listSort [] bs x = case x of
+                    "asc" -> [minimum bs] ++ listSort [] (filter (/=minimum bs) bs) x
+                    "desc" -> [maximum bs] ++ listSort [] (filter (/=maximum bs) bs) x
 listSort as bs x = case x of
-                    "asc" -> case (minimum as) < (minimum bs) of
-                                True -> listSort (filter (/=minimum as) as) bs x ++ [minimum as]
-                                False -> listSort as (filter (/=minimum bs) bs) x ++ [minimum bs]
-                    "desc" ->  case (maximum as) > (maximum bs) of
-                                True -> listSort (filter (/=maximum as) as) bs x ++ [maximum as]
-                                False -> listSort as (filter (/=maximum bs) bs) x ++ [maximum bs]
-                    otherwise -> error "Invalid list sort operation"
+                    "asc" -> listSort (as ++ bs) [] "asc"
+                    "desc" -> listSort (as ++ bs) [] "desc"
 
 -- Extension
 listExt :: [Integer] -> [Integer] -> ([Integer], [Integer])
@@ -89,12 +83,12 @@ listExt as bs | length as < length bs = listExt (as ++ [0]) bs
 -- Arithmetic
 listArith :: [Integer] -> [Integer] -> Integer -> [Integer]
 listArith [] [] x= []
-listArith (a:as) (b:bs) x | length (a:as) == length (b:bs) = if x == 1 then (a+b) : listArith as bs x
-                                                             else if x == 2 then (a-b) : listArith as bs x
-                                                             else if x == 3 then (a*b) : listArith as bs x
-                                                             else if x == 4 then if b == 0 then 0 : listArith as bs x
-                                                                                 else (div a b) : listArith as bs x
-                                                             else error "Invalid list arithmetic operation"
+listArith (a:as) (b:bs) x | length (a:as) == length (b:bs) = case x of 
+                                                              1 -> (a+b) : listArith as bs x
+                                                              2 -> (a-b) : listArith as bs x
+                                                              3 -> (a*b) : listArith as bs x
+                                                              4 -> if b == 0 then 0 : listArith as bs x
+                                                                   else (div a b) : listArith as bs x
                           | otherwise = listArith (fst (listExt (a:as) (b:bs))) (snd (listExt (a:as) (b:bs))) x
 
 -------------
@@ -124,8 +118,10 @@ main = do
 
   print $ listMatch [1,2,3,4,5,6] [1,3,5]
 
-  print $ listSort [] [2,0,4,5,1,3] "asc"
+  print $ listSort [2,0,4,5,1,3] [] "asc"
   print $ listSort [2,0,4,5,1,3] [] "desc"
+  print $ listSort [] [2,0,4,5,1,3] "asc"
+  print $ listSort [] [2,0,4,5,1,3] "desc"
   print $ listSort [3,0,9,2,5,8] [6,5,1,7,4,2] "asc"
   print $ listSort [3,0,9,2,5,8] [6,5,1,7,4,2] "desc"
 
