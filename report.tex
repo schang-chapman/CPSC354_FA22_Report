@@ -17,6 +17,9 @@
     
 \usepackage{listings}
 
+\usepackage{graphicx}
+\graphicspath{ {./Images/} }
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -49,11 +52,6 @@
 \theoremstyle{remark}    
   \newtheorem{remark}[theorem]{Remark}
 
-\usepackage{graphicx}
-\graphicspath{ {./Images/} }
-
-\usepackage{hyperref}
-
 \title{CPSC-354 Report}
 \author{Sharon Chang  \\ Chapman University}
 
@@ -64,21 +62,20 @@
 \maketitle
 
 \begin{abstract}
-Placeholder  
+The following report documents how I learned the various concepts needed to understand how functional and imperative programming languages work. I first learned about recursion, then Lambda calculus and abstract reduction trees. These concepts built on one another in order to help me understand the computer logic behind programming languages by the end of the semester. This report also culminates in a final project where I explore various methods of implementing infinite lists in Haskell and discuss the various pros and cons associated with each approach.
 \end{abstract}
 
 \tableofcontents
 
 \section{Introduction}\label{intro}
-
-The following report documents how I learned the various concepts needed to understand how functional and imperative programming languages work. I first learned about recursion, then Lambda calculus and abstract reduction trees. These concepts built on one another in order to help me understand the computer logic behind programming languages by the end of the semester. This report also culminates in a final project where I explore various methods of implementing infinite lists in Haskell and discuss the various pros and cons associated with each approach.
+In order to work as an effective programmer, it is best to understand the minutia working in the shadows that allows your code to work. In this interest, I was taught various concepts core to the understanding of how computer logic parses different types of programming languages. As a culmination of what I learned, I also created a final project centered around the Haskell programming language that I had been using throughout the semester in my coursework.
 
 \section{Homework}\label{homework}
 
 
 \subsection{Week 1}
 
-In order to familiarizae myself with LaTex, I was instructed to create a program to calculate the greatest common denominator of any two numbers in any programming language of my choice. I chose to write my GCD program in Python.
+In order to familiarize myself with LaTex, I was instructed to create a program to calculate the greatest common denominator of any two numbers in any programming language of my choice. I chose to write my GCD program in Python.
 
 \begin{lstlisting}
 def numInput():
@@ -304,7 +301,7 @@ The following demonstrates the syntax trees for various arithmetic expressions. 
 
 \subsection{Week 5}
 
-There is a folder called "hw5" in the repository that this folder is contained in. Using the grammar and interpreter contained within, I generated linearized abstract syntax trees for various Lambda expressions, then made 2D trees of them as seem below.
+There is a folder called "hw5" in another folder labelled "src" that can be found in the repository that this file is contained in. Using the grammar and interpreter contained within, I generated linearized abstract syntax trees for various Lambda expressions, then made 2D trees of them as seem below.
 
 \begin{center}
 \includegraphics[width=\linewidth]{hw5p1}
@@ -771,42 +768,154 @@ Of the 5 files, 3 of them also contain list manipulation functions. seqZip and s
 My initial prototype consisted of a single file that implemented the various functions as I saw fit. All of the list generation functions were present in this prototype, but there were only 2 list manipulation functions: list extension and list arithmetic. List arithmetic was initially planned as 4 separate functions for each arithmetic operation, but upon noticing that I was reusing code between almost all of them, I decided to merge the 4 together into 1 function and use an integer input to differentiate between each input. The project was greatly expanded in order to better demonstrate the various methods of using infinite lists that I had found in Haskell.
 
 \medskip\noindent
-seqRec can be treated as the second prototype on account of it building off knowledge I had already learned from class. In doing this, I was able to map out the logic of the functions from a familiar approach before tackling them in new ways.
+This first prototype was largely built off of knowledge I had learned through class, or from basic infinite list introductions that I found online. One of these was the 2007 article on TechRepublic and the other was a 2019 blog post by Elias Hernandis. Upon attempting to implement them myself, I found myself frequently referring to Zvon and HaskellWiki in order to find the specifics of how various functions work, as well as find other related functions that I could perhaps put to use. In order to better demonstrate the information I learned from these sources, I expanded the initial prototype into my current 5-file setup to show various different methods of list implementation.
+
+\medskip\noindent
+seqRec can be treated as the second prototype of the project, but the first protoype of the project as it currently exists, on account of it building off knowledge I had already learned from class. In doing this, I was able to map out the logic of the functions from a familiar approach before tackling them in new ways. Often I found myself reusing structures that I had previously learned in order to build functions using the following structure, such as how list comprehension became very useful for my later work with the built-in Haskell functions.
 
 \subsection{Documentation}
 \subsubsection{List Comprehension}
-Test
+In Haskell, list comprehension is a built-in method of allowing one to construct complex lists directly through declaring a list, without needing extraneous functions. According to Nick Gibson, the writer of the TechRepublic article, such an approach saves money because the list and its items are built as it is declared, allowing it to construct infinite lists without needing infinite memory to store everything in. My use of list comprehension comes down to these two basic implementations.
+
+\begin{lstlisting}
+[1..10] = [1,2,3,4,5,6,7,8,9,10]	-- Linear Generation
+[x | x <- [1..10]]			-- Input Generation
+\end{lstlisting}
+%
+Linear generation was used for all of the mathematical sequences on account of it being very suited to handle mathematical patterns. The list comprehension implementation of Fibonacci was also the only one to use a where clause to indicate certain base case scenarios. This will be elaborated upon later when I write about the map function, but I thought it was interesting to note that all the other functions could be declared within a single line using either linear or input generation.
+
+\medskip\noindent
+The use of input generation was better suited for the list manipulation functions where I wanted more complex reasoning for the construction of the lists. Of the list manipulation functions, listFilter and listMatch were particularly easy to implement by simply checking whether or not an element was present. This is also the only implementation where I was able to extend lists by simply tacking on a separate list consisting of the necessary amount of 0s. In both recursion and map implementations of the same function, I had to take very roundabout approaches that I personally disliked. My list arithmetic function also shows how complexity can be introduced into the input generation approach of list comprehension on both sides of the guard rail. This opens up the possibility for much more complex list manipulation.
+
+\medskip\noindent
+The list comprehension feature of Haskell is both useful and flexible, proving itself to be capable of handling all the functions with relative ease.
+
+\medskip\noindent
+However, despite the input generation implementation being very effective at building list manipulation functions, I also found it strongly lacking on account of limitations with its ability to parse individual elements. This is most obvious looking at my implementation of the listSort function. I could not find a method of parsing each individual element and deeming whether or not it belong in the output. Therefore, I ended up taking the much clunkier approach of generating a massive list running from the minimum of one list to the maximum of the other, and then using my listMatch function to remove all the extraneous values. This is obviously a terribly inefficient way of approaching the function, but when limited to the list comprehension approach, this was the best that I could come up with.
 
 \subsubsection{Haskell map Function}
-Test
+On account of being a function, when building the project with the map function I frequently found myself having to declare lists as part of the input instead of simply building one to my specifications, as seen in the example below.
 
-\subsubsection{Haskell zipWith Function}
-Test
+\begin{lstlisting}
+func l = map func [1..l]
+	where func 0 = 0
+			 func 1 = 1
+			 func n = n
+\end{lstlisting}
+%
+All of my mathematical sequences involve me declaring a generic list using list comprehension and using the map function to modify it to fit my desired output. This was quite useful, and I was very glad that I first built out the list comprehension implementations and learned that concept prior to moving onto this one. I found it interesting that for every map function, I had to individually declare certain outputs with where clauses, whereas in my list comprehension implementation, only the Fibonacci function needed a where clause on account of its unique starting sequence. While this is objectively less efficient than using list comprehension, which accomplished the same things in singular lines while using less memory, I found it interesting in how it reflected mathematical equational reasoning that many of these sequences are traditionally written with.
 
-\subsubsection{Haskell scanl Function}
-Test
+\medskip\noindent
+However, I found it interesting that this approach was generally much better at list manipulation than list comprehension, especially when combined with the filter and flip functions. Additionally, these map functions relied heavily on recursion, with only extension and length not using them. However, unlike the recursive equvalents of these functions, the map functions were much easier to read and I did not need to build out every base case for them.
 
-\subsubsection{Manipulating Lists}
-Test
+\medskip\noindent
+Additionally, while building out the extension and arithmetic functions with the map implementation, I found that it was very useful that I could build the map function in a manner that strong resembled Lambda calculus.
+
+\begin{lstlisting}
+func y = map (\x -> y) [0..10] = [y, y, y, y, y, y, y, y, y, y]
+\end{lstlisting}
+%
+This approach allowed me to use conditionals and perform operations in the extension and arithmetic functions in a way that reflected material that we had learned in class.
+
+\subsubsection{Haskell zipWith and scanl Functions}
+On account of zipWith and scanl functioning in similar ways that led to similar roadblocks, I have elected to speak of them together rather than give each a separate section because I feel I would find myself reiterating many points between the two. Both functions were exceptionally good at building the list generation functions, albeit relying on the generation of other lists in order for me to have the necessary inputs to execute them with.
+
+\medskip\noindent
+The zipWith function works as in the following example.
+
+\begin{lstlisting}
+func l = zipwith (+) [0..l] [0..l] = [0, 1, 2, ... l+l]
+\end{lstlisting}
+%
+This is very useful for quickly performing simple operations between two lists, but on account of all my generation functions taking in integer inputs, I had to use list comprehension to build out these lists in order to achieve the desired output. I initially assumed that this would mean it would excel at list manipulation, but I encountered so many errors that it became too time consuming and I ultimately had to toss it. The explanation for why is further below in the Critical Appraisal.
+
+\medskip\noindent
+Similarly, the scanl function works as follows:
+
+\begin{lstlisting}
+func l = scanl (+) 2 [0..l] = [2, 4, 6, ... l+2]
+\end{lstlisting}
+%
+This is also a very efficient method of performing a simple list operation upon a list, except it runs into the similar problem of my functions not providing any lists on input, therefore requiring me to construct lists for the scanl function to work with. Unlike the zipWith function, I was under no illusion that this could perform well with the list manipulation functions, and ultimately those got scrapped for similar reasons as the list manipulations of the zipWith implementation.
+
+\subsubsection{Other Functions and Features}
+Here I will detail various other interesting built-in Haskell functions and items that I encountered while working on this project. Some things I learned, while new, were not quite interesting enough to talk about at length, and therefor have been excluded from this list.
+
+\begin{itemize}
+\item {Tuples: I encountered tuples as a solution to the list extension function needing to output 2 lists. I initially thought I could just output the fixed list, but then that meant that an input of 2 lists with matching lengths would have nothing to output. Additionally, there would be no way for any following functions to determine which of the two input lists needs to be replaced with the returning output list. This led me to the concept of tuples in Haskell, which would allow me to return my two lists and then separate them with the fst and snd functions. Unlike lists, tuples are denoted by parentheses, e.g., (a, b, c). Tuples are able to store different data types, unlike lists which can only work with whatever singluar data type they have been declared with. However, they are also fixed in length, unlike the infinite lists of Haskell. While this means that we can reliably use tuples in our Haskell programs without being concerned about variability in its size, this also means that it lacks the flexibility in storing variable amounts of information that a list has.}
+\item {Filter: The filter function works similar to my listFilter function except instead of taking 2 lists as inputs, it takes a condition and 1 list. All elements satisfying the condition are returned. This was very useful in removing extraneous elements from my lists when building my map implementations where I found myself sometimes forced to use roundabout approaches to building certain list manipulation functions.}
+\item {Flip: Filp is a very unique function on account of it working somewhat strangely in comparison to conventional functions. It takes in a function and arguments, then returns the result of the function with the reverse order of arguments. While this does not appear significant, it was greatly helpful in reducing the map implementations of listFilter and listMatch down to singluar lines by flipping the functions elem and notElem. These uses would output lists of elements that the filter function could then remove from those lists and produce the desired result. My use of the flip function often occurred paired alongside the filter function and with the use of recursion, as demonstrated below.}
+\end{itemize}
+\begin{lstlisting}
+func as bs = map func (filter (flip elem bs) as) where func x = x
+\end{lstlisting}
+\begin{itemize}
+\item Iterate: Iterate is a built-in infinite list function that will generate an infinite list according to the pattern that was input to it. This was very useful in generating lists to for the calculations needed to perform my mathematical sequences with the zipWith function, on account of zipWith automatically outputting a list to the length of the shorter input list. This meant that iterate's infinite output would not affect my outputs. The patterns generated by iterate can be as simple as addition to resembling the Lambda calculus inputs of other functions, as seen in the following example adapted from the Zvon page about the iterate function:
+\end{itemize}
+\begin{lstlisting}
+iterate (\x -> (x+3)*2) = [1, 8, 22, 50, 106, ...]
+\end{lstlisting}
+\begin{itemize}
+\item Replicate: Replicate is a list generating function that generates a list as long as the first input and consisting only of elements matching the second input. This was useful for generating dummy lists to give zipWith and scanl to work with. These dummy lists would have the desired length and be populated with the same value throughout, as seen below.
+\end{itemize}
+\begin{lstlisting}
+replicate 5 0 = [0, 0, 0, 0, 0]
+\end{lstlisting}
+\begin{itemize} 
+\item Repeat: Repeat functions similar to replicate, except it generates an infinite list and does not take a length input. This was used instead of replicate in places where the generated list length did not matter.
+\end{itemize}
+\begin{lstlisting}
+repeat 0 = [0, 0, 0, ...]
+\end{lstlisting}
+\begin{itemize}
+\item Take: Take uses 2 inputs, one indicating list length, and the other being a list. It takes the first x amount of values from the list, according to the indicated length, and outputs that. I used this in scenarios where I only needed a section of a list, or in situations where the list would otherwise print forever (as occurred when writing the scanl application of the Fibonacci sequence.
+\end{itemize}
+\begin{lstlisting}
+take 5 (iterate (+1) 0) = [0, 1, 2, 3, 4]
+\end{lstlisting}
 
 \subsection{Critical Appraisal}
-There are no known bugs in my final project.
+There are no known bugs in my final project, however it is worth explaining why seqZip and seqScan had all of the list manipulation functions removed.
+
+\medskip\noindent
+Both seqZip and seqScan are missing half the functions present in the other 3 files; all of the list manipulation functions. This is on account of having great difficulty wrangling the two functions to do as I desired. Both zipWith and scanl are built to take in 3 inputs, one of which is a function to be performed between the other two functions. I found that it was very difficult to make these produce filtered or sorted lists on account of those being boolean comparisons that are meant to entirely remove the irrevlevant elements. Instead, I found that if I were to implement these functions, I would need to essentially merge my two input lists together and then insert a placeholder value to mark elements that I want to remove, and then scrub my list of those placeholder values. This could only work if I had a good placeholder value to work with. In the case of listFilter, this was simple, I could simply insert a value from the second list and then scrub those out because they are supposed to disappear anyways. However, when building listMatch, I realized that there was no practical way to recreate this. I would need to find a way to always designate a placeholder value that is not in either of the two input lists, and given the variability of my input lists, I could not come up with an appropriate solution to this problem. I wanted to put in some sort of null value, only to discover that Haskell does not have that capability, so I ultimately scrapped those functions. Sort was scrapped for similar implementation issues, where I could not come up with a good formulaic approach to implementing listSort using those two functions without ending up creating more problems for myself. listExtension could not work on account of zipWith consistently reducing to the smaller list, so I attempted creating longer dummy lists and zipping those, only to encounter errors at compile time. Similarly, I ran into issues attempting to implement a conditional when builting the arithmetic functions for the divide-by-0 case, and with limited time at my hands, I decided it was best to scrap the entire list manipulation section of both seqZip and seqScan.
 
 \subsubsection{Observations}
-Test
+Overall, I feel that list comprehension was the best general approach to the mathematical sequence functions, on account of taking up very little space both visually in the code, but also by not requiring me to conjure up additional lists just to reach my desired output as I did with the map, zipWith, and scanl functions. However, I feel like the map function was best suited to performing the list manipulations. zipWith and scanl seemed very interesting at first, but when put into implementation, I feel that they are best used for more complex sequences when necessary, and, at least at the scale of my project, proved to be not that much better than general list comprehension.
+
+\medskip\noindent
+I was very surprised by how good it felt to work with list comprehension in Haskell, as it initially seemed like it might be very limited. However, its ability to perform both traditional equational reasoning and also evaluate expressions similar to Lambda calculus made it feel like a good general-use tool when generating and manipulating lists in Haskell. 
 
 \subsubsection{Questions}
-Test
+I wonder if there could still be some way to accomplish the list manipulation functions in Haskell using the zipWith and scanl functions. I found rather hamfisted approaches to them, and while those approaches ultimately didn't work, I did not feel as if they were an impossible task. Rather, I felt that if I had approached the project from this approach sooner and given myself more time, I could perhaps reach a solution to those problems.
+
+\medskip\noindent
+Additionally, Haskell's library of list manipulation functions and the existence of tuples in Haskell have left me to wonder about how it holds up in comparison to other programming languages and how they handle lists. What are the benefits and drawbacks of these different approaches to data storage between programming language? Why does Haskell offer so much support for lists?
 
 \subsubsection{Further Comments}
-Test
+The variety of list functions I found in Haskell as well as the flexibility of Haskell's list comprehension have left me wondering what more could be done with lists in Haskell. I can see how these could be greatly useful and the potential these functions have for higher-complexity work involving lists, but I myself am at a loss for possible ideas and implementations of these tools.
 
 \section{Conclusions}\label{conclusions}
+Overall, the course touched on subjects that are strongly present throughout programming and helped build a strong logical foundation for students to become better programmers.
 
-Placeholder
+\medskip\noindent
+Recursion is such an important aspect of programming that it is taught early in the coursework for the Computer Science major and enforced throughout. Implementing recursion equationally through Haskell helped to visualize recursion from a new lens and led me to view recursive programming from a more mathematical standpoint than a purely logical one. Practicing recursive programming through Lambda calculus further reinforced this new understanding of programming as a mathematical exercise. While initially confusing, it felt very intuitive after grasping the basic logical rules at play.
+
+\medskip\noindent
+Using grammar and trees throughout the course was also very helpful for learning how computer logic works. The trees were especially useful in giving a strong visual for how something as basic as arithmetic operations has many steps to go through for a computer to understand and parse it. Combining that with our brief interaction with abstract reduction trees helped to understand better how a computer breaks down these elements.
+
+\medskip\noindent
+I had previously encountered these concepts during NLP, but spending more time on them in this course helped me understand them better. While I previously walked away from NLP because I did not understand how to construct grammar and trees, my experience in this course has made me better grasp those concepts that previously confused me.
+
+\medskip\noindent
+Aside from NLP, I feel that understanding these basic logical building blocks is greatly helpful to understanding programming at large. While it is understood that computers cannot reason the same way people do, it is hard to truly grasp this concept unless you are forced to confront it head-on. While I was frustrated by the redundancy of many steps and how it felt like many simple things were being drawn out to the point of being unnecessarily complicated, I also understood that these frustrations highlight the difference between a person and a computer. The computer has no sense of intuition and must perform complex logical reasoning to grasp even the most basic tasks. Therefore, as a programmer, it is imperative for me to understand what steps the computer is going through to write efficient code for it. It is easy to forget how much logical reasoning a computer must be instructed to do and, in turn, lose sight of your subject while writing your code. If novelists and authors write for people, then programmers write for computers. A writer, regardless of their craft, has to understand their audience to communicate effectively with them, whether the audience is human or otherwise.
 
 \begin{thebibliography}{99}
+\bibitem[EH]{EH} \href{https://hernandis.me/2019/10/20/haskell-infinite-structures.html}{Defining Infinite Structures in Haskell}, Elias Hernandis, 2019.
+\bibitem[HW]{HW} \href{https://wiki.haskell.org/Haskell}{HaskellWiki}, HaskellWiki, 2013.
 \bibitem[PL]{PL} \href{https://github.com/alexhkurz/programming-languages-2022/blob/main/README.md}{Programming Languages 2022}, Chapman University, 2022.
+\bibitem[TR]{TR} \href{https://www.techrepublic.com/article/infinite-list-tricks-in-haskell/}{Infinite List Tricks in Haskell}, TechRepublic, 2007.
+\bibitem[ZV]{ZV} \href{http://www.zvon.org/}{Zvon}, Zvon.
 \end{thebibliography}
 
 \end{document}
