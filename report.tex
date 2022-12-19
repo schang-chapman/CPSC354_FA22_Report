@@ -628,12 +628,42 @@ The invariants of this ARS are:
 
 \subsection{Week 10}
 The following code demonstrates the computation steps for the factorial function $fix_F$2.
-\begin{lstlisting}
-fix F 2 = (def of fix)
-F (fix F) 2 = (def of F)
-???
+\begin{align*}
+fix_F 2 = {\rm (def \: of \: fix)}
+\end {align*}
+\begin {align*}
+F (fix_F) 2 = {\rm (def \: of \: F)}
+\end {align*}
+\begin {align*}
+(\Lambda \: {\rm n. \; if \: n} ==0 \: {\rm then} \: 1 \: {\rm else} \: fix_F (n-1)_n) 2 = {\rm (beta \: reduction)}
+\end {align*}
+\begin {align*}
+({\rm if} \: 2==0 \: {\rm then} \: 1 \: {\rm else} \: fix_f(n-1)_n) 2 = {\rm (if \: then \: else)}
+\end{align*}
+\begin {align*}
+(fix_F 1) * 2 = {\rm (def \: of \: F)}
+\end{align*}
+\begin {align*}
+(\Lambda \: {\rm n. \; if \: n} ==0 \: {\rm then} \: 1 \: {\rm else} \: fix_F (n-1)_n) 2 = {\rm (beta \: reduction)}
+\end{align*}
+\begin {align*}
+({\rm if} \: 1==0 \: {\rm then} \: 1 \: {\rm else} \: fix_F (1-1)_n) 2 = {\rm (if \: then \: else)}
+\end{align*}
+\begin {align*}
+(fix_F 0) * 2 = {\rm (def \: of \: F)}
+\end{align*}
+\begin {align*}
+(\Lambda \: {\rm n. \; if \: n} ==0 \: {\rm then} \: 1 \: {\rm else} \: fix_F (n-1)_n) 2 = {\rm (beta \: reduction)}
+\end{align*}
+\begin {align*}
+({\rm if} \: 0==0 \: {\rm then} \: 1 \: {\rm else} \: fix_F (n-1)_n) 2 = {\rm (if \: then \: else)}
+\end{align*}
+\begin {align*}
+1*2 = {\rm arithmetic}
+\end{align*}
+\begin {align*}
 2
-\end{lstlisting}
+\end{align*}
 
 \subsection{Week 11}
 The following short essay discusses \href{https://www.cs.tufts.edu/~nr/cs257/archive/simon-peyton-jones/contracts.pdf}{this paper} on a prototype for a programming language based on writing and implementing contracts.
