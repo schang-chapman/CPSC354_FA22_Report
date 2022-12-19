@@ -37,11 +37,11 @@ fib l = [fib x | x <- [0..l-1]]
 
 -- Filter
 listFilter :: [Integer] -> [Integer] -> [Integer]
-listFilter as bs = [x | x <- as, not (x `elem` bs)]
+listFilter as bs = [x | x <- as, (notElem x bs)]
 
 -- Match
 listMatch :: [Integer] -> [Integer] -> [Integer]
-listMatch as bs = [x | x <- as, x `elem` bs]
+listMatch as bs = [x | x <- as, elem x bs]
 
 -- Sort
 listSort :: [Integer] -> [Integer] -> String -> [Integer]
@@ -59,8 +59,8 @@ listSort as bs x = case x of
 -- Extension
 listExt :: [Integer] -> [Integer] -> ([Integer], [Integer])
 listExt as bs | length as > length bs = (as, bs ++ [0 | x <- [1..length as - length bs]])
-                | length as < length bs = (as ++ [0 | x <- [1..length bs - length as]], bs)
-                | otherwise = (as, bs)
+              | length as < length bs = (as ++ [0 | x <- [1..length bs - length as]], bs)
+              | otherwise = (as, bs)
 
 -- Arithmetic
 listArith :: [Integer] -> [Integer] -> Integer -> [Integer]
@@ -92,7 +92,6 @@ main = do
   print $ cube 5
 
   print $ fib 5
-
 
   -- List Manipulation Tests --
   -----------------------------

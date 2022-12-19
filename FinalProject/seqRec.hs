@@ -66,7 +66,6 @@ listSort [] [] x = []
 listSort as [] x = case x of
                     "asc" -> [minimum as] ++ listSort (filter (/=minimum as) as) [] x
                     "desc" -> [maximum as] ++ listSort (filter (/=maximum as) as) [] x
-                    
 listSort [] bs x = case x of
                     "asc" -> [minimum bs] ++ listSort [] (filter (/=minimum bs) bs) x
                     "desc" -> [maximum bs] ++ listSort [] (filter (/=maximum bs) bs) x
@@ -110,7 +109,6 @@ main = do
   print $ cube 5
 
   print $ fib 5
-
 
   -- List Manipulation Tests --
   -----------------------------
