@@ -71,7 +71,7 @@ Placeholder
 
 \section{Introduction}\label{intro}
 
-Placeholder
+The following report documents how I learned the various concepts needed to understand how functional and imperative programming languages work. I first learned about recursion, then Lambda calculus and abstract reduction trees. These concepts built on one another in order to help me understand the computer logic behind programming languages by the end of the semester. This report also culminates in a final project where I explore various methods of implementing infinite lists in Haskell and discuss the various pros and cons associated with each approach.
 
 \section{Homework}\label{homework}
 
@@ -583,7 +583,7 @@ For my final project, the two major parts will be the list generating functions 
 November 13th: Complete the 4 list generating functions (triangle, cube, square, and fibonacci)
 
 \medskip\noindent
-December 4th: Complete the list artihmetic functions, but at this point they will only work with lists of the same length
+December 4th: Complete the list manipulation functions, but at this point they will only work with lists of the same length
 
 \medskip\noindent
 December 11th: Figure out how to make lists of different lengths compatible in my arithmetic functions.
@@ -730,10 +730,42 @@ The following lines demonstrate the proof tree demonstrates the above steps in H
 
 \section{Project}
 
-The final project I have created goes into the variety of methods with which Haskell allows the user to create and manipulate infinite lists. These methods are demonstrated by implementing the same 11 functions in 5 different ways. These functions generate mathematical patterns as lists and also perform various forms of list manipulation between two lists.
+The final project I have created goes into the variety of methods with which Haskell allows the user to create and manipulate infinite lists. These methods are demonstrated by implementing the same list generation and manipulation functions in different ways. These functions generate mathematical patterns as lists and also perform various forms of list manipulation between two lists.
 
 \subsection{Specification}
-Placeholder
+My project specification changed radically in the last week of the project. The initial project will be discussed in the prototype section. This section will describe the project as it currently exists.
+
+\medskip\noindent
+My goal was to produce 5 different Haskell files demonstrating 5 different methods of approaching infinite lists in Haskell. There are 5 files in my final project folder and each one is named after the infinite list method used for the functions.
+
+\begin {itemize}
+\item seqRec: Uses recursive functions.
+\item seqComp: Uses list comprehension.
+\item seqMap: Uses the built-in Haskell map function.
+\item seqZip: Uses the built-in Haskell zipwith function.
+\item seqScan: Uses the built-in Haskell scan function.
+\end {itemize}
+%
+All 5 of these files contain list generation functions that generate a variety of mathematical patterns as lists. The list generation functions work as follows:
+
+\begin {itemize}
+\item Arithmetic: Takes in inputs dictating the length of the list, the starting number, and the number to be added to each previous number. Outputs the corresponding arithmetic number sequence.
+\item Geometric:  Takes in inputs dictating the length of the list, the starting number, and the number to be multiplied against each previous number. Outputs the corresponding geometric number sequence.
+\item Triangle: Takes in an input dictating the length of the list. Generates a sequence of triangular numbers.
+\item Square: Takes in an input dictating the length of the list. Generates a sequence of square numbers.
+\item Cube: Takes in an input dictating the length of the list. Generates a sequence of cubed numbers.
+\item Fibonacci: Takes in an input dictating the length of the list. Generates a sequence of Fibonacci numbers.
+\end {itemize}
+%
+Of the 5 files, 3 of them also contain list manipulation functions. seqZip and seqScan do not contain these functions on account of issues with implementation and time constraints which will be elaborated upon further later on. The list manipulation functions are as follows:
+
+\begin {itemize}
+\item List Filter: Takes in 2 list inputs. Removes all elements present in the second list from the first list and outputs the cleaned version of the first list.
+\item List Match: Takes in 2 list inputs. Outputs a list of all elements present in both lists.
+\item List Sort: Takes in 2 list inputs and a string. The string must say either "asc" or "desc" and is case sensitive. If the string is "asc", the two lists are combined and their elements sorted in ascending order. If the string is "desc" then they are sorted in descending order. Duplicate elements are removed.
+\item List Extension: Takes in 2 list inputs. If the two lists are of different lengths, it will output the shorter list with extra 0s added to the end in order to match its length with the longer list. Otherwise, both lists are output as is. Regardless, these two lists are output as elements of a tuple.
+\item List Arithmetic: Takes in 2 list inputs and an integer. The integer indicates which of 4 basic arithmetic methods to use (addition, subtraction, multiplication, or integer division). The output list is the result of performing the chosen arithmetic function between the two lists. In subtraction and division, the element of the first list will be reduced by its corresponding element in the second list. If dividing by 0, it returns a 0 for that element.
+\end {itemize}
 
 \subsection{Prototype}
 
