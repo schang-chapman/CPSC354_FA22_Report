@@ -3,7 +3,10 @@
 ### Sharon Chang
 ### Submission Date: Dec. 18 2022
 
-Each Haskell file in this folder contains the same set of 11 functions. The difference is that each file uses a different approach to infinite lists in order to accomplish the same results. The following instructions list each of the functions and the necessary inputs to use them. The functions have the same names and inputs across each Haskell file.
+Each Haskell file in this folder contains the same set of 11 functions.* The difference is that each file uses a different approach to infinite lists in order to accomplish the same results. The following instructions list each of the functions and the necessary inputs to use them. The functions have the same names and inputs across each Haskell file.
+
+*There are 2 exceptions. seqZip and seqScan generate and manipulate lists with the zipWith and scanl functions respectively. The nature of these functions makes them very unsuited to constructing list manipulation functions. Because these files were added very late into the project, I found myself with severely limited time and not enough brain power to come up with a timely solution. In the interest of keeping properly finishing the remainder of the final report, I opted to drop all 5 list manipulation functions from those two files.
+  
 
 # Mathematical Functions
 ### Arithmetic: ```arith :: Integer -> Integer -> Integer -> [Integer]```
